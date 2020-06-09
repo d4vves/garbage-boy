@@ -11,7 +11,9 @@ TLDR: Move Garbage Boy back home to their trash can without touching any of thos
 ![Wireframe](gb-wireframe.jpg)
 
 ## MVP
-- Render a CLI-like game screen displaying the canvas, GB's health, current stage, and GB's inventory
+- Create a CLI-like game screen
+- Render a start screen with game-play instructions and a start button
+- Render game screen displaying the canvas, GB's health and current stage
 - Render a Garbage Boy character that can move freely using WASD keys
 - Render GB's garbage can home which upon arrival will end the current stage and move on to the next stage
 - Render three nasty rats at different X axis values that move up and down along the Y axis. If there is a collision, GB dies!
@@ -22,5 +24,5 @@ TLDR: Move Garbage Boy back home to their trash can without touching any of thos
 ## Stretch Goals
 - Have rats spawn randomly on the canvas
 - Have rats move randomly on the canvas
-- Picking up garbage will add it to GB's inventory
-- Ability to click on garbage in inventory to either make the rats movement pause for a few seconds or increase GB's movement speed
+- Picking up garbage will add it to GB's inventory, display inventory on game screen
+- Ability to click on garbage in inventory to either make the rats movement pause for a few seconds or increase GB's movement speed depending on garbage type of water bottle or chewing gum
