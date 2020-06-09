@@ -8,8 +8,7 @@ Garbage Boy also hates littering. Make sure to pick up garbage on your way home,
 
 TLDR: Move Garbage Boy back home to their trash can without touching any of those nasty rats. Pick up garbage to keep Garbage Boy happy //and gain some sick stat boosts.
 
-## Wireframe
-(/gb-wireframe.jpg)
+![Wireframe](gb-wireframe.jpg)
 
 ## MVP
 - Render a CLI-like game screen displaying the canvas, GB's health, current stage, and GB's inventory
