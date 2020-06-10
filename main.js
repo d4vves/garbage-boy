@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     game.width = 800
     game.height = 400
     let ctx = game.getContext('2d')
+    let themeSong = document.createElement('AUDIO')
+    themeSong.src = 'sounds/gb-theme.mp3'
 
     /*----- Create character sprites -----*/
     let garbageImg = new Image()
@@ -55,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 && garbageBoy.y < this.y + this.height
                 && garbageBoy.y + garbageBoy.height > this.y) {
                     garbageBoy.alive = false
+                    themeSong.pause()
                     stageText.textContent = 'Ew! A rat!'
                     healthText.textContent = 'Health: 💔'
                     retryBtn.style.display = 'inline-block'
@@ -113,6 +116,8 @@ document.addEventListener('DOMContentLoaded', () => {
         stageText.textContent = 'Take Garbage Boy home!'
         healthText.style.display = 'inline-block'
         healthText.textContent = 'Health: ❤️'
+        themeSong.play()
+        themeSong.loop = true
         gameLoop = setInterval(gameTick, 60)
         gameTick()
     })
@@ -120,6 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     retryBtn.addEventListener('click', e => {
         e.preventDefault()
         retryBtn.style.display = 'none'
+        themeSong.play()
         resetGame()
     })
 
@@ -133,6 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
             rat2.collision()
             rat3.collision()
         } else {
+            themeSong.pause()
             endStage()
         }
         if (garbage.alive) {
