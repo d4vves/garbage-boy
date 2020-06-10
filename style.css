@@ -10,6 +10,13 @@ body {
 h1 {
     font-family: 'Nova Mono', monospace;
     font-size: 52px;
+    margin-bottom: 0;
+}
+
+h2 {
+    font-family: 'Nova Mono', monospace;
+    margin-top: 0;
+    margin-bottom: 50px;
 }
 
 #container {

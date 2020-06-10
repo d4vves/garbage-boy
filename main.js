@@ -91,14 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let randomY1 = generateY(game.height - 30)
     let randomY2 = generateY(game.height - 30)
     let randomY3 = generateY(game.height - 30)
-    
 
-    // Game Pieces to be created
     let garbageBoy = new GamePiece(740, 163, 60, 75, 10, gbImg)
     let garbageCan = new GamePiece(10, 175, 40, 50, 0, garbageImg)
     let garbage = new GamePiece(randomX, randomY, 20, 20, 0, bottleImg)
-    let rat1 = new Rat(200, randomY1, 30, 30, 5, ratImg)
-    let rat2 = new Rat(400, randomY2, 30, 30, 4, ratImg)
+    let rat1 = new Rat(200, randomY1, 30, 30, 7, ratImg)
+    let rat2 = new Rat(400, randomY2, 30, 30, 6, ratImg)
     let rat3 = new Rat(600, randomY3, 30, 30, 5, ratImg)
 
     /*----- Event Listeners & Functions -----*/
@@ -158,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 && garbageBoy.y < garbageCan.y + garbageCan.height
                 && garbageBoy.y + garbageBoy.height > garbageCan.y
                 && garbage.alive) {
-                    stageText.textContent = 'GB is too depressed to go home.'
+                    stageText.textContent = 'GB is too sad to go home.'
                 }
     }
 
@@ -169,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
             && garbageBoy.y < garbage.y + garbage.height
             && garbageBoy.y + garbageBoy.height > garbage.y) {
                 garbage.alive = false
-                stageText.textContent = 'Nice find! That is some rad garbage, my dude.'
+                stageText.textContent = 'Rad garbage my dude!'
             } 
     }
 
@@ -183,8 +181,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Restore game to initial state
     const resetGame = () => {
         ctx.clearRect(0, 0, game.width, game.height)
+        retryBtn.style.display = 'none'
         stageText.textContent = 'Take Garbage Boy home!'
         healthText.textContent = 'Health: ❤️'
+        garbageBoy.alive = true
+        garbageCan.alive = true
+        garbage.alive = true
+        garbageBoy.x = 740
+        garbageBoy.y = 163
+        gameLoop = setInterval(gameTick, 60)
+        gameTick()
     }
 
     /*----- Movement Mechanics -----*/
