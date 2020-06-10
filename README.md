@@ -10,7 +10,7 @@ TLDR: Move Garbage Boy with the WASD keys and navigate back home to their trash 
 
 [Play Game](https://d4vves.github.io/garbage-boy/)
 
-![Wireframe](gb-wireframe.jpg)
+![Wireframe](img/gb-wireframe.jpg)
 
 Check out how I planned out all of the amazing things Garbage Boy can do [here](https://hackmd.io/@d4vves/SJVPKrTn8). 
 
@@ -36,6 +36,6 @@ Check out how I planned out all of the amazing things Garbage Boy can do [here](
 
 ## Blooper Reel
 - Garbage Boy sprite v.1
-![Garbage Boy v.1](garbageboy-v1.png)
+![Garbage Boy v.1](img/garbageboy-v1.png)
 - I created a random Y variable for the rats to spawn at and expected each rat to magically have a different random Y variable. Thank you Pete for pointing out my shortcomings. 
 - I spent the better part of a day trying to figure out the logic behind my rats moving up and down the Y axis. My sincerest apologies to Yoshi for attempting to help with said logic, only to realize 45 minutes later that I was assigning the up and down variables in my function rather than globally. 
