@@ -8,6 +8,8 @@ Garbage Boy also hates littering. Make sure to pick up garbage on your way home,
 
 TLDR: Move Garbage Boy back home to their trash can without touching any of those nasty rats. Pick up garbage to keep Garbage Boy happy //and gain some sick stat boosts.
 
+[Play Game](https://d4vves.github.io/garbage-boy/)
+
 ![Wireframe](gb-wireframe.jpg)
 
 ## MVP
@@ -25,7 +27,6 @@ TLDR: Move Garbage Boy back home to their trash can without touching any of thos
 - Every time you get GB to their home a new level will start
 - Display current level
 - Each level the rats movement speed will increase
-- If GB collides with garbage can without picking up garbage, level will change but movement speed will be decreased
 - Have rats spawn randomly on the canvas
 - Have rats move randomly on the canvas
 - Picking up garbage will add it to GB's inventory, display inventory on game screen
@@ -35,4 +36,4 @@ TLDR: Move Garbage Boy back home to their trash can without touching any of thos
 - Garbage Boy sprite v.1
 ![Garbage Boy v.1](garbageboy-v1.png)
 - I created a random Y variable for the rats to spawn at and expected each rat to magically have a different random Y variable. Thank you Pete for pointing out my shortcomings. 
-- I spent the better part of an entire day trying to figure out the logic behind my rats moving up and down the Y axis. My sincerest apologies to Yoshi for attempting to help with said logic, only to realize 45 minutes later that I was assigning the up and down variables in my function rather than globally. 
+- I spent the better part of a day trying to figure out the logic behind my rats moving up and down the Y axis. My sincerest apologies to Yoshi for attempting to help with said logic, only to realize 45 minutes later that I was assigning the up and down variables in my function rather than globally. 
