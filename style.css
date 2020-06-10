@@ -1,0 +1,70 @@
+body {
+    color: #C6CA53;
+    background-color: #0A0A0B;
+    font-family: 'VT323', monospace;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Nova Mono', monospace;
+    font-size: 52px;
+}
+
+#container {
+    margin: 0 auto;
+    width: 80%;
+    height: 80%;
+}
+
+#intro {
+    font-size: 24px
+}
+
+#start-btn {
+    font-family: 'VT323', monospace;
+    color: #C6CA53;
+    background-color: #0A0A0B;
+}
+
+#main {
+    display: none;
+    border: 1px dashed #C6CA53;
+    height: 400px;
+    width: 800px;
+}
+
+#bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 800px;
+    margin: 0 auto;
+    font-size: 24px;
+}
+
+#bottom-left, #bottom-right {
+    display: none;
+    width: 50%;
+}
+
+#stage, #retry, #health {
+    width: 33%;
+}
+
+#stage {
+    text-align: left;
+}
+
+#health {
+    text-align: right;
+}
+
+#retry-btn {
+    font-family: 'VT323', monospace;
+    color: #C6CA53;
+    background-color: #0A0A0B;
+    display: none;
+}

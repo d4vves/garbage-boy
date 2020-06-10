@@ -13,15 +13,19 @@ TLDR: Move Garbage Boy back home to their trash can without touching any of thos
 ## MVP
 - Create a CLI-like game screen
 - Render a start screen with game-play instructions and a start button
-- Render game screen displaying the canvas, GB's health and current stage
+- Render game screen displaying the canvas, GB's health
 - Render a Garbage Boy character that can move freely using WASD keys
-- Render GB's garbage can home which upon arrival will end the current stage and move on to the next stage
+- Render GB's garbage can home which upon arrival will end the game
 - Render three nasty rats at different X axis values that move up and down along the Y axis. If there is a collision, GB dies!
 - Render a piece of garbage that when GB collides, it will be removed from the canvas
-- If GB reaches their garbage can home without picking up the garbage, their movement speed will be decreased for the next level
-- Every time you get GB to their home and start a new level, the rats movement speed is increased
+- If GB reaches their garbage can home without picking up the garbage collision will not happen
+
 
 ## Stretch Goals
+- Every time you get GB to their home a new level will start
+- Display current level
+- Each level the rats movement speed will increase
+- If GB collides with garbage can without picking up garbage, level will change but movement speed will be decreased
 - Have rats spawn randomly on the canvas
 - Have rats move randomly on the canvas
 - Picking up garbage will add it to GB's inventory, display inventory on game screen
