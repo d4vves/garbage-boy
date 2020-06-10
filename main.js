@@ -23,11 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
     ratImg.src = 'img/rat.png'
 
     /*----- Variable Declarations -----*/
-    // Game piece creator
-    function GamePiece(x, y, color, width, height, speed, img) {
+    // Constructors
+    function GamePiece(x, y, width, height, speed, img) {
         this.x = x
         this.y = y
-        this.color = color
         this.width = width
         this.height = height
         this.speed = speed
@@ -35,6 +34,46 @@ document.addEventListener('DOMContentLoaded', () => {
         this.img = img
         this.render = function() {
             ctx.drawImage(this.img, this.x, this.y)
+        }
+    }
+
+    function Rat(x, y, width, height, speed, img) {
+        this.x = x
+        this.y = y
+        this.width = width
+        this.height = height
+        this.speed = speed
+        this.moveUp = true
+        this.moveDown = false
+        this.img = img
+        this.render = function() {
+            ctx.drawImage(this.img, this.x, this.y)
+        }
+        this.collision = function() {
+            if (garbageBoy.x + garbageBoy.width > this.x
+                && garbageBoy.x < this.x + this.width
+                && garbageBoy.y < this.y + this.height
+                && garbageBoy.y + garbageBoy.height > this.y) {
+                    garbageBoy.alive = false
+                    stageText.textContent = 'Ew! A rat!'
+                    healthText.textContent = 'Health: 💔'
+                    retryBtn.style.display = 'inline-block'
+                }
+        }
+        this.move = function() {
+            if (this.moveUp && this.y > 0) {
+                this.y -= this.speed
+            } else if (this.moveDown && this.y < game.height) {
+                this.y += this.speed
+            } else if (this.moveUp && this.y <= 0) {
+                this.y++
+                this.moveUp = false
+                this.moveDown = true
+            } else if (this.moveDown && this.y >= game.height - this.height - 1) {
+                this.moveUp = true
+                this.moveDown = false
+                this.y = game.height - this.height
+            }
         }
     }
 
@@ -55,15 +94,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
 
     // Game Pieces to be created
-    let garbageBoy = new GamePiece(740, 163, 'green', 60, 75, 10, gbImg)
-    let garbageCan = new GamePiece(10, 175, 'grey', 40, 50, 0, garbageImg)
-    let garbage = new GamePiece(randomX, randomY, 'yellow', 20, 20, 0, bottleImg)
-    let rat1 = new GamePiece(200, randomY1, 'brown', 30, 30, 3, ratImg)
-    let rat2 = new GamePiece(400, randomY2, 'brown', 30, 30, 3, ratImg)
-    let rat3 = new GamePiece(600, randomY3, 'brown', 30, 30, 5, ratImg)
-
-    rat3.moveUp = true
-    rat3.moveDown = false
+    let garbageBoy = new GamePiece(740, 163, 60, 75, 10, gbImg)
+    let garbageCan = new GamePiece(10, 175, 40, 50, 0, garbageImg)
+    let garbage = new GamePiece(randomX, randomY, 20, 20, 0, bottleImg)
+    let rat1 = new Rat(200, randomY1, 30, 30, 5, ratImg)
+    let rat2 = new Rat(400, randomY2, 30, 30, 4, ratImg)
+    let rat3 = new Rat(600, randomY3, 30, 30, 5, ratImg)
 
     /*----- Event Listeners & Functions -----*/
     startBtn.addEventListener('click', e => {
@@ -90,9 +126,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (garbageBoy.alive && garbageCan.alive) {
             garbageCanCollision()
             garbageCollision()
-            rat1Collision()
-            rat2Collision()
-            rat3Collision()
+            rat1.collision()
+            rat2.collision()
+            rat3.collision()
         } else {
             endStage()
         }
@@ -104,7 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
         rat1.render()
         rat2.render()
         rat3.render()
-        moveRat3()
+        rat1.move()
+        rat2.move()
+        rat3.move()
     }
 
     // If GB makes it home!
@@ -133,43 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 garbage.alive = false
                 stageText.textContent = 'Nice find! That is some rad garbage, my dude.'
             } 
-    }
-
-    // If GB runs into one of those nasty rats!
-    const rat1Collision = () => {
-        if (garbageBoy.x + garbageBoy.width > rat1.x
-            && garbageBoy.x < rat1.x + rat1.width
-            && garbageBoy.y < rat1.y + rat1.height
-            && garbageBoy.y + garbageBoy.height > rat1.y) {
-                garbageBoy.alive = false
-                stageText.textContent = 'Ew! A rat!'
-                healthText.textContent = 'Health: 💔'
-                retryBtn.style.display = 'inline-block'
-            }
-    }
-
-    const rat2Collision = () => {
-        if (garbageBoy.x + garbageBoy.width > rat2.x
-            && garbageBoy.x < rat2.x + rat2.width
-            && garbageBoy.y < rat2.y + rat2.height
-            && garbageBoy.y + garbageBoy.height > rat2.y) {
-                garbageBoy.alive = false
-                stageText.textContent = 'Ew! A rat!'
-                healthText.textContent = 'Health: 💔'
-                retryBtn.style.display = 'inline-block'
-            }
-    }
-
-    const rat3Collision = () => {
-        if (garbageBoy.x + garbageBoy.width > rat3.x
-            && garbageBoy.x < rat3.x + rat3.width
-            && garbageBoy.y < rat3.y + rat3.height
-            && garbageBoy.y + garbageBoy.height > rat3.y) {
-                garbageBoy.alive = false
-                stageText.textContent = 'Ew! A rat!'
-                healthText.textContent = 'Health: 💔'
-                retryBtn.style.display = 'inline-block'
-            }
     }
 
     // Game interval
@@ -214,20 +215,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     document.addEventListener('keydown', moveGarbageBoy)
 
-    //Move rat, move!
-    const moveRat3 = () => {
-        if (rat3.moveUp && rat3.y > 0) {
-            rat3.y -= rat3.speed
-        } else if (rat3.moveDown && rat3.y < game.height) {
-            rat3.y += rat3.speed
-        } else if (rat3.moveUp && rat3.y <= 0) {
-            rat3.y++
-            rat3.moveUp = false
-            rat3.moveDown = true
-        } else if (rat3.moveDown && rat3.y >= game.height - rat3.height - 1) {
-            rat3.moveUp = true
-            rat3.moveDown = false
-            rat3.y = game.height - rat3.height
-        }
-    }
 })
