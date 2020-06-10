@@ -30,3 +30,9 @@ TLDR: Move Garbage Boy back home to their trash can without touching any of thos
 - Have rats move randomly on the canvas
 - Picking up garbage will add it to GB's inventory, display inventory on game screen
 - Ability to click on garbage in inventory to either make the rats movement pause for a few seconds or increase GB's movement speed depending on garbage type of water bottle or chewing gum
+
+## Blooper Reel
+- ![Garbage Boy v.1](garbageboy-v1.png)
+- I created a random Y variable for the rats to spawn at and expected each rat to magically have a different random Y variable. Thank you Pete for pointing out my shortcomings. 
+- I spent the better part of an entire day trying to figure out the logic behind my rats moving up and down the Y axis. My sincerest apologies to Yoshi for attempting to help with said logic, only to realize 45 minutes later that I was assigning the up and down variables in my function rather than globally. 
+- 

@@ -92,12 +92,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let randomY2 = generateY(game.height - 30)
     let randomY3 = generateY(game.height - 30)
 
+    // Game asset creation
     let garbageBoy = new GamePiece(740, 163, 60, 75, 10, gbImg)
     let garbageCan = new GamePiece(10, 175, 40, 50, 0, garbageImg)
     let garbage = new GamePiece(randomX, randomY, 20, 20, 0, bottleImg)
     let rat1 = new Rat(200, randomY1, 30, 30, 7, ratImg)
     let rat2 = new Rat(400, randomY2, 30, 30, 6, ratImg)
     let rat3 = new Rat(600, randomY3, 30, 30, 5, ratImg)
+
+    // Game interval
+    let gameLoop = null
 
     /*----- Event Listeners & Functions -----*/
     startBtn.addEventListener('click', e => {
@@ -109,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         stageText.textContent = 'Take Garbage Boy home!'
         healthText.style.display = 'inline-block'
         healthText.textContent = 'Health: ❤️'
+        gameLoop = setInterval(gameTick, 60)
         gameTick()
     })
 
@@ -170,9 +175,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 stageText.textContent = 'Rad garbage my dude!'
             } 
     }
-
-    // Game interval
-    let gameLoop = setInterval(gameTick, 60)
 
     const endStage = () => {
         clearInterval(gameLoop)
