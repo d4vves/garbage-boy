@@ -221,11 +221,17 @@ document.addEventListener('DOMContentLoaded', () => {
     muteBtn.addEventListener('click', e => {
         e.preventDefault()
         themeSong.muted = true
+        garbageUp.muted = true
+        stageSound.muted = true
+        ratSound.muted = true
     })
 
     unMuteBtn.addEventListener('click', e => {
         e.preventDefault()
         themeSong.muted = false
+        garbageUp.muted = false
+        stageSound.muted = false
+        ratSound.muted = false
     })
 
     /*----- Functions -----*/
@@ -326,11 +332,11 @@ document.addEventListener('DOMContentLoaded', () => {
         garbageBoy.x = 740
         garbageBoy.y = 163
         //remove any garbage effects
-        if (randomGarbo === 0) {
+        if (randomGarbo === 0 && garbage.used) {
             rat1.speed += 5
             rat2. speed += 5
             rat3.speed += 5
-        } else if (randomGarbo === 1) {
+        } else if (randomGarbo === 1 && garbage1.used) {
             garbageBoy.speed -= 40
         }
         //create new garbage spawn integer
