@@ -10,6 +10,7 @@ TLDR: Move Garbage Boy with the WASD keys and navigate back home to their trash 
 
 [Play Game](https://d4vves.github.io/garbage-boy/)
 
+## Wireframe
 ![Wireframe](img/gb-wireframe.jpg)
 
 Check out how I planned out all of the amazing things Garbage Boy can do [here](https://hackmd.io/@d4vves/SJVPKrTn8). 
