@@ -24,11 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let garbageImg = new Image()
     garbageImg.src = 'img/garbage.png'
     let gbImg = new Image()
-    gbImg.src = 'img/garbageboy.png'
+    gbImg.src = 'img/garbageboy2.png'
     let bottleImg = new Image()
     bottleImg.src = 'img/bottle.png'
     let ratImg = new Image()
     ratImg.src = 'img/rat.png'
+
 
     /*----- Variable Declarations -----*/
     // Constructors
@@ -107,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let randomY3 = generateY(0, 370)
 
     // Game asset creation
-    let garbageBoy = new GamePiece(740, 163, 60, 75, 10, gbImg)
+    let garbageBoy = new GamePiece(740, 163, 44, 72, 10, gbImg)
     let garbageCan = new GamePiece(10, 175, 40, 50, 0, garbageImg)
     let garbage = new GamePiece(randomX, randomY, 20, 20, 0, bottleImg)
     let rat1 = new Rat(200, randomY1, 30, 30, 7, ratImg)

@@ -40,6 +40,7 @@ h2 {
     border: 1px dashed #C6CA53;
     height: 400px;
     width: 800px;
+    background-image: url('img/bg.png');
 }
 
 #bottom {
