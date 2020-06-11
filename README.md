@@ -36,7 +36,7 @@ Check out how I planned out all of the amazing things Garbage Boy can do [here](
 - Have rats move randomly on the canvas
 
 ## Notes
-- This game was created using HTML5, CSS, JavaScript and Font Awesome.
+- This game was created using HTML5, CSS, and JavaScript.
 - All artwork was created by myself using Gimp.
 - All music and sound effects were created by myself using Garageband and the YMCK magical 8 bit plugin.
 

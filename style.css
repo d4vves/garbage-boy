@@ -88,6 +88,10 @@ h2 {
     width: 50%;
 }
 
+#inventory {
+    text-align: right;
+}
+
 #inventory-img {
     width: 30px;
 }

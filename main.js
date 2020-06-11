@@ -7,10 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let stageText = document.getElementById('stage')
     let messageText = document.getElementById('message')
     let inventoryText = document.getElementById('inventory')
+    let inventoryImg = document.getElementById('inventory-img')
     let healthText = document.getElementById('health')
     let game = document.getElementById('game')
     let retryBtn = document.getElementById('retry-btn')
     let stageBtn = document.getElementById('stage-btn')
+    let currentInv = new Image()
     game.width = 800
     game.height = 400
     let ctx = game.getContext('2d')
@@ -114,6 +116,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     this.alive = false
                     garbageUp.play()
                     messageText.textContent = 'Rad garbage my dude!'
+                    currentInv.src = this.img.src
+                    inventoryImg.appendChild(currentInv)
                 }
         }
     }
@@ -263,6 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (!garbage1.alive) {
             garbage1.alive = true
         }
+        inventoryImg.removeChild(currentInv)
         gameLoop = setInterval(gameTick, 60)
         gameTick()
     }
