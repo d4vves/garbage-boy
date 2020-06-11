@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let stageNum = 1
 
     // Game asset creation
-    let garbageBoy = new GamePiece(740, 163, 44, 72, 10, gbImg)
+    let garbageBoy = new GamePiece(740, 163, 35, 68, 10, gbImg)
     let garbageCan = new GamePiece(10, 175, 40, 50, 0, garbageImg)
     let garbage = new PieceOfGarbage(randomX, randomY, 20, 20, bottleImg)
     let garbage1 = new PieceOfGarbage(randomX, randomY, 20, 20, chocoImg)
@@ -208,9 +208,9 @@ document.addEventListener('DOMContentLoaded', () => {
     inventoryImg.addEventListener('click', e => {
         e.preventDefault()
         if (e.target.src.includes('img/bottle.png')) {
-            rat1.speed -= 5
-            rat2. speed -= 5
-            rat3.speed -= 5
+            rat1.speed -= stageNum + 1
+            rat2. speed -= stageNum + 1
+            rat3.speed -= stageNum + 1
             if (rat1.speed <= 0) {
                 rat1.speed = 0
             }
@@ -352,9 +352,9 @@ document.addEventListener('DOMContentLoaded', () => {
         garbageBoy.y = 163
         //remove any garbage effects
         if (garbage.used || garbage1.used) {
-            rat1.speed = rat1.speed + stageNum
-            rat2. speed = rat2.speed + stageNum
-            rat3.speed = rat3.speed + stageNum
+            rat1.speed = 7 + stageNum
+            rat2. speed = 6 + stageNum
+            rat3.speed = 5 + stageNum
             garbageBoy.speed = 10
         }
         //create new garbage spawn integer
