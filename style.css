@@ -82,3 +82,10 @@ h2 {
     background-color: #0A0A0B;
     display: none;
 }
+
+#stage-btn {
+    font-family: 'VT323', monospace;
+    color: #C6CA53;
+    background-color: #0A0A0B;
+    display: none;
+}

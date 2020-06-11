@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let healthText = document.getElementById('health')
     let game = document.getElementById('game')
     let retryBtn = document.getElementById('retry-btn')
+    let stageBtn = document.getElementById('stage-btn')
     let messageText = document.getElementById('message')
     game.width = 800
     game.height = 400
@@ -143,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let randomGarbo = randomNum()
 
     // Stage number
-    let stageNum = 0
+    let stageNum = 1
 
     // Game asset creation
     let garbageBoy = new GamePiece(740, 163, 44, 72, 10, gbImg)
@@ -177,6 +178,13 @@ document.addEventListener('DOMContentLoaded', () => {
         retryBtn.style.display = 'none'
         themeSong.play()
         resetStage()
+    })
+
+    stageBtn.addEventListener('click', e => {
+        e.preventDefault()
+        stageBtn.style.display = 'none'
+        themeSong.play()
+        advanceStage()
     })
 
     /*----- Functions -----*/
@@ -219,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 garbageCan.alive = false
                 stageSound.play()
                 messageText.textContent = 'Welcome home, Garbage Boy!'
-                retryBtn.style.display = 'inline-block'
+                stageBtn.style.display = 'inline-block'
             } else if (garbageBoy.x < garbageCan.x + garbageCan.width
                 && garbageBoy.y < garbageCan.y + garbageCan.height
                 && garbageBoy.y + garbageBoy.height > garbageCan.y
@@ -249,6 +257,31 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (!garbage1.alive) {
             garbage1.alive = true
         }
+        gameLoop = setInterval(gameTick, 60)
+        gameTick()
+    }
+
+    // Advance stage
+    const advanceStage = () => {
+        ctx.clearRect(0, 0, game.width, game.height)
+        stageBtn.style.display = 'none'
+        messageText.textContent = 'Take Garbage Boy home!'
+        healthText.textContent = 'Health: ❤️'
+        garbageBoy.alive = true
+        garbageCan.alive = true
+        garbage.alive = true
+        garbageBoy.x = 740
+        garbageBoy.y = 163
+        if (!garbage.alive) {
+            garbage.alive = true
+        } else if (!garbage1.alive) {
+            garbage1.alive = true
+        }
+        stageNum++
+        rat1.speed += 2
+        rat2.speed += 2
+        rat3.speed += 2
+        stageText.innerText = `Stage: ${stageNum}`
         gameLoop = setInterval(gameTick, 60)
         gameTick()
     }
