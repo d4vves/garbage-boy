@@ -190,7 +190,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (garbageBoy.x + garbageBoy.width > garbage.x
             && garbageBoy.x < garbage.x + garbage.width
             && garbageBoy.y < garbage.y + garbage.height
-            && garbageBoy.y + garbageBoy.height > garbage.y) {
+            && garbageBoy.y + garbageBoy.height > garbage.y
+            && garbage.alive) {
                 garbage.alive = false
                 garbageUp.play()
                 stageText.textContent = 'Rad garbage my dude!'
