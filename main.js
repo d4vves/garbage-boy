@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Game interval
     let gameLoop = null
 
-    /*----- Event Listeners & Functions -----*/
+    /*----- Event Listeners -----*/
     startBtn.addEventListener('click', e => {
         e.preventDefault()
         startBtn.style.display = 'none'
@@ -173,8 +173,10 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault()
         retryBtn.style.display = 'none'
         themeSong.play()
-        resetGame()
+        resetStage()
     })
+
+    /*----- Functions -----*/
 
     // What the game does each frame
     const gameTick = () => {
@@ -188,14 +190,12 @@ document.addEventListener('DOMContentLoaded', () => {
             themeSong.pause()
             endStage()
         }
-        if (garbage.alive) {
-            if (randomGarbo === 0) {
-                garbage.render()
-                garbage.collision()
-            } else if (garbage1.alive) {
-                garbage1.render()
-                garbage1.collision()
-            }
+        if (garbage.alive && randomGarbo === 0) {
+             garbage.render()
+             garbage.collision()
+        } else if (garbage1.alive && randomGarbo === 1) {
+            garbage1.render()
+            garbage1.collision()
         }
         garbageBoy.render()
         garbageCan.render()
@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (garbageBoy.x < garbageCan.x + garbageCan.width
             && garbageBoy.y < garbageCan.y + garbageCan.height
             && garbageBoy.y + garbageBoy.height > garbageCan.y
-            && !garbage.alive) {
+            && (!garbage.alive || !garbage1.alive)) {
                 garbageCan.alive = false
                 stageSound.play()
                 stageText.textContent = 'Welcome home, Garbage Boy!'
@@ -220,17 +220,18 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (garbageBoy.x < garbageCan.x + garbageCan.width
                 && garbageBoy.y < garbageCan.y + garbageCan.height
                 && garbageBoy.y + garbageBoy.height > garbageCan.y
-                && garbage.alive) {
+                && (garbage.alive || garbage1.alive)) {
                     stageText.textContent = 'GB is too sad to go home.'
                 }
     }
 
+    // Interval clear
     const endStage = () => {
         clearInterval(gameLoop)
     }
 
-    // Restore game to initial state
-    const resetGame = () => {
+    // Retry current stage
+    const resetStage = () => {
         ctx.clearRect(0, 0, game.width, game.height)
         retryBtn.style.display = 'none'
         stageText.textContent = 'Take Garbage Boy home!'
@@ -240,11 +241,11 @@ document.addEventListener('DOMContentLoaded', () => {
         garbage.alive = true
         garbageBoy.x = 740
         garbageBoy.y = 163
-        // if (!garbage.alive) {
-
-        // }
-        garbage.x = generateX(60, 720)
-        garbage.y = generateY(0, 360)
+        if (!garbage.alive) {
+            garbage.alive = true
+        } else if (!garbage1.alive) {
+            garbage1.alive = true
+        }
         gameLoop = setInterval(gameTick, 60)
         gameTick()
     }
