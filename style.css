@@ -48,7 +48,7 @@ h2 {
     margin-bottom: 10px;
     width: 800px;
     margin: 0 auto;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 #bottom-left, #bottom-right {
@@ -56,20 +56,40 @@ h2 {
     width: 50%;
 }
 
-#stage, #center, #health {
-    width: 33%;
+#left, #right {
+    width: 40%;
+}
+
+#left {
+    display: flex;
 }
 
 #stage {
     text-align: left;
+    width: 20%;
+}
+
+#message {
+    width: 80%;
+    text-align: center;
 }
 
 #center {
     text-align: center;
+    width: 20%;
 }
 
-#message {
-    margin: 0;
+#right {
+    display: flex;
+    justify-content: space-between;
+}
+
+#inventory, #health {
+    width: 50%;
+}
+
+#inventory-img {
+    width: 30px;
 }
 
 #health {

@@ -5,11 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let intro = document.getElementById('intro')
     let main = document.getElementById('main')
     let stageText = document.getElementById('stage')
+    let messageText = document.getElementById('message')
+    let inventoryText = document.getElementById('inventory')
     let healthText = document.getElementById('health')
     let game = document.getElementById('game')
     let retryBtn = document.getElementById('retry-btn')
     let stageBtn = document.getElementById('stage-btn')
-    let messageText = document.getElementById('message')
     game.width = 800
     game.height = 400
     let ctx = game.getContext('2d')
@@ -73,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ratSound.play()
                     themeSong.pause()
                     messageText.textContent = 'Ew! A rat!'
-                    healthText.textContent = 'Health: 💔'
+                    healthText.textContent = 'Health: 0'
                     retryBtn.style.display = 'inline-block'
                 }
         }
@@ -159,6 +160,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let gameLoop = null
 
     /*----- Event Listeners -----*/
+
+    // Start button
     startBtn.addEventListener('click', e => {
         e.preventDefault()
         startBtn.style.display = 'none'
@@ -166,13 +169,15 @@ document.addEventListener('DOMContentLoaded', () => {
         main.style.display = 'inline-block'
         stageText.textContent = `Stage: ${stageNum}`
         messageText.textContent = 'Take Garbage Boy home!'
-        healthText.textContent = 'Health: ❤️'
+        inventoryText.textContent = 'Inventory: '
+        healthText.textContent = 'Health: 1'
         themeSong.play()
         themeSong.loop = true
         gameLoop = setInterval(gameTick, 60)
         gameTick()
     })
 
+    // Retry button
     retryBtn.addEventListener('click', e => {
         e.preventDefault()
         retryBtn.style.display = 'none'
@@ -180,6 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resetStage()
     })
 
+    // Next stage button
     stageBtn.addEventListener('click', e => {
         e.preventDefault()
         stageBtn.style.display = 'none'
@@ -246,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.clearRect(0, 0, game.width, game.height)
         retryBtn.style.display = 'none'
         messageText.textContent = 'Take Garbage Boy home!'
-        healthText.textContent = 'Health: ❤️'
+        healthText.textContent = 'Health: 1'
         garbageBoy.alive = true
         garbageCan.alive = true
         garbage.alive = true
@@ -266,16 +272,20 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.clearRect(0, 0, game.width, game.height)
         stageBtn.style.display = 'none'
         messageText.textContent = 'Take Garbage Boy home!'
-        healthText.textContent = 'Health: ❤️'
         garbageBoy.alive = true
         garbageCan.alive = true
         garbage.alive = true
         garbageBoy.x = 740
         garbageBoy.y = 163
-        if (!garbage.alive) {
+        randomGarbo = randomNum()
+        if (!garbage.alive && randomGarbo === 0) {
             garbage.alive = true
-        } else if (!garbage1.alive) {
+            garbage.x = generateX(60, 720)
+            garbage.y = generateY(0, 360)
+        } else if (!garbage1.alive && randomGarbo === 1) {
             garbage1.alive = true
+            garbage1.x = generateX(60, 720)
+            garbage1.y = generateY(0, 360)
         }
         stageNum++
         rat1.speed += 2
