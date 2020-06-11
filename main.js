@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let healthText = document.getElementById('health')
     let game = document.getElementById('game')
     let retryBtn = document.getElementById('retry-btn')
+    let messageText = document.getElementById('message')
     game.width = 800
     game.height = 400
     let ctx = game.getContext('2d')
@@ -70,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     garbageBoy.alive = false
                     ratSound.play()
                     themeSong.pause()
-                    stageText.textContent = 'Ew! A rat!'
+                    messageText.textContent = 'Ew! A rat!'
                     healthText.textContent = 'Health: 💔'
                     retryBtn.style.display = 'inline-block'
                 }
@@ -110,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 && this.alive) {
                     this.alive = false
                     garbageUp.play()
-                    stageText.textContent = 'Rad garbage my dude!'
+                    messageText.textContent = 'Rad garbage my dude!'
                 }
         }
     }
@@ -141,6 +142,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let randomGarbo = randomNum()
 
+    // Stage number
+    let stageNum = 0
+
     // Game asset creation
     let garbageBoy = new GamePiece(740, 163, 44, 72, 10, gbImg)
     let garbageCan = new GamePiece(10, 175, 40, 50, 0, garbageImg)
@@ -159,9 +163,8 @@ document.addEventListener('DOMContentLoaded', () => {
         startBtn.style.display = 'none'
         intro.style.display = 'none'
         main.style.display = 'inline-block'
-        stageText.style.display = 'inline-block'
-        stageText.textContent = 'Take Garbage Boy home!'
-        healthText.style.display = 'inline-block'
+        stageText.textContent = `Stage: ${stageNum}`
+        messageText.textContent = 'Take Garbage Boy home!'
         healthText.textContent = 'Health: ❤️'
         themeSong.play()
         themeSong.loop = true
@@ -215,13 +218,13 @@ document.addEventListener('DOMContentLoaded', () => {
             && (!garbage.alive || !garbage1.alive)) {
                 garbageCan.alive = false
                 stageSound.play()
-                stageText.textContent = 'Welcome home, Garbage Boy!'
+                messageText.textContent = 'Welcome home, Garbage Boy!'
                 retryBtn.style.display = 'inline-block'
             } else if (garbageBoy.x < garbageCan.x + garbageCan.width
                 && garbageBoy.y < garbageCan.y + garbageCan.height
                 && garbageBoy.y + garbageBoy.height > garbageCan.y
                 && (garbage.alive || garbage1.alive)) {
-                    stageText.textContent = 'GB is too sad to go home.'
+                    messageText.textContent = 'GB is too sad to go home.'
                 }
     }
 
@@ -234,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetStage = () => {
         ctx.clearRect(0, 0, game.width, game.height)
         retryBtn.style.display = 'none'
-        stageText.textContent = 'Take Garbage Boy home!'
+        messageText.textContent = 'Take Garbage Boy home!'
         healthText.textContent = 'Health: ❤️'
         garbageBoy.alive = true
         garbageCan.alive = true

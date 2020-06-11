@@ -45,7 +45,6 @@ h2 {
 #bottom {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     margin-bottom: 10px;
     width: 800px;
     margin: 0 auto;
@@ -57,12 +56,20 @@ h2 {
     width: 50%;
 }
 
-#stage, #retry, #health {
+#stage, #center, #health {
     width: 33%;
 }
 
 #stage {
     text-align: left;
+}
+
+#center {
+    text-align: center;
+}
+
+#message {
+    margin: 0;
 }
 
 #health {
