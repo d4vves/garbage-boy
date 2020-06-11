@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /*----- Variable Declarations -----*/
-    // Constructors
+    // Garbage Boy / Garbage Boy constructor
     function GamePiece(x, y, width, height, speed, img) {
         this.x = x
         this.y = y
@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Rat constructor
     function Rat(x, y, width, height, speed, img) {
         this.x = x
         this.y = y
@@ -99,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Garbage constructor
     function PieceOfGarbage(x, y, width, height, img) {
         this.x = x
         this.y = y
@@ -138,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return Math.floor(Math.random() * (max - min) + min)
     }
 
-    let randomX = generateX(60, 720)
+    let randomX = generateX(100, 720)
     let randomY = generateY(0, 360)
     let randomY1 = generateY(0, 370)
     let randomY2 = generateY(0, 370)
@@ -205,12 +207,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // Clicking on inventory item
     inventoryImg.addEventListener('click', e => {
         e.preventDefault()
-        if (randomGarbo === 0) {
+        if (e.target.src.includes('img/bottle.png')) {
             rat1.speed -= 5
             rat2. speed -= 5
             rat3.speed -= 5
+            if (rat1.speed <= 0) {
+                rat1.speed = 0
+            }
+            if (rat2.speed <= 0) {
+                rat2.speed = 0
+            }
+            if (rat3.speed <= 0) {
+                rat3.speed = 0
+            }
             garbage.used = true
-        } else if (randomGarbo === 1) {
+        } else if (e.target.src.includes('img/choco-bar.png')) {
             garbageBoy.speed += 40
             garbage1.used = true
         }
@@ -292,27 +303,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Retry current stage
     const resetStage = () => {
+        //clear board
         ctx.clearRect(0, 0, game.width, game.height)
+        //update display
         retryBtn.style.display = 'none'
         messageText.textContent = 'Take Garbage Boy home!'
         healthText.textContent = 'Health: 1'
+        //reset alive-ness & position
         garbageBoy.alive = true
         garbageCan.alive = true
         garbage.alive = true
+        //set GB at original position
         garbageBoy.x = 740
         garbageBoy.y = 163
+        //reset garbage at same point
         if (!garbage.alive) {
             garbage.alive = true
         } else if (!garbage1.alive) {
             garbage1.alive = true
         }
-        if (randomGarbo === 0 && garbage.used) {
-            rat1.speed += 5
-            rat2. speed += 5
-            rat3.speed += 5
-        } else if (randomGarbo === 1 && garbage1.used) {
-            garbageBoy.speed -= 40
+        //reset any garbage effects
+        rat1.speed = 7 + stageNum
+        rat2. speed = 6 + stageNum
+        rat3.speed = 5 + stageNum
+        garbageBoy.speed = 10
+        //clear inventory if holding anything
+        if (inventoryImg.hasChildNodes()) {
+            inventoryImg.removeChild(currentInv)
         }
+        //start your engines
         gameLoop = setInterval(gameTick, 60)
         gameTick()
     }
@@ -332,23 +351,22 @@ document.addEventListener('DOMContentLoaded', () => {
         garbageBoy.x = 740
         garbageBoy.y = 163
         //remove any garbage effects
-        if (randomGarbo === 0 && garbage.used) {
-            rat1.speed += 5
-            rat2. speed += 5
-            rat3.speed += 5
-        } else if (randomGarbo === 1 && garbage1.used) {
-            garbageBoy.speed -= 40
+        if (garbage.used || garbage1.used) {
+            rat1.speed = rat1.speed + stageNum
+            rat2. speed = rat2.speed + stageNum
+            rat3.speed = rat3.speed + stageNum
+            garbageBoy.speed = 10
         }
         //create new garbage spawn integer
         randomGarbo = randomNum()
         //reset garbage to alive and place new garbo
         if (randomGarbo === 0) {
             garbage.alive = true
-            garbage.x = generateX(60, 720)
+            garbage.x = generateX(100, 720)
             garbage.y = generateY(0, 360)
         } else if (randomGarbo === 1) {
             garbage1.alive = true
-            garbage1.x = generateX(60, 720)
+            garbage1.x = generateX(100, 720)
             garbage1.y = generateY(0, 360)
         }
         //increase stage
@@ -359,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
         rat3.speed += 2
         //update stage number
         stageText.innerText = `Stage: ${stageNum}`
-        //resume game
+        //start your engines
         gameLoop = setInterval(gameTick, 60)
         gameTick()
     }
