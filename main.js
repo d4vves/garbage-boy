@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     game.width = 800
     game.height = 400
     let ctx = game.getContext('2d')
+
+    /*----- Sounds -----*/
     let themeSong = document.createElement('audio')
     themeSong.src = 'sounds/gb-theme.mp3'
     let garbageUp = document.createElement('audio')
@@ -27,6 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
     gbImg.src = 'img/garbageboy2.png'
     let bottleImg = new Image()
     bottleImg.src = 'img/bottle.png'
+    let chocoImg = new Image()
+    chocoImg.src = 'img/choco-bar.png'
     let ratImg = new Image()
     ratImg.src = 'img/rat.png'
 
@@ -88,6 +92,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function PieceOfGarbage(x, y, width, height, img) {
+        this.x = x
+        this.y = y
+        this.width = width
+        this.height = height
+        this.alive = true
+        this.img = img
+        this.render = function() {
+            ctx.drawImage(this.img, this.x, this.y)
+        }
+        this.collision = function() {
+            if (garbageBoy.x + garbageBoy.width > this.x
+                && garbageBoy.x < this.x + this.width
+                && garbageBoy.y < this.y + this.height
+                && garbageBoy.y + garbageBoy.height > this.y
+                && this.alive) {
+                    this.alive = false
+                    garbageUp.play()
+                    stageText.textContent = 'Rad garbage my dude!'
+                }
+        }
+    }
+
     // Random X and Y coordinate generators to spawn garbage and each rat randomly
     const generateX = (min, max) => {
         min = Math.ceil(min)
@@ -107,10 +134,18 @@ document.addEventListener('DOMContentLoaded', () => {
     let randomY2 = generateY(0, 370)
     let randomY3 = generateY(0, 370)
 
+    // Randomly spawn piece of garbage
+    const randomNum = () => {
+        return Math.floor(Math.random() * 2)
+    }
+
+    let randomGarbo = randomNum()
+
     // Game asset creation
     let garbageBoy = new GamePiece(740, 163, 44, 72, 10, gbImg)
     let garbageCan = new GamePiece(10, 175, 40, 50, 0, garbageImg)
-    let garbage = new GamePiece(randomX, randomY, 20, 20, 0, bottleImg)
+    let garbage = new PieceOfGarbage(randomX, randomY, 20, 20, bottleImg)
+    let garbage1 = new PieceOfGarbage(randomX, randomY, 20, 20, chocoImg)
     let rat1 = new Rat(200, randomY1, 30, 30, 7, ratImg)
     let rat2 = new Rat(400, randomY2, 30, 30, 6, ratImg)
     let rat3 = new Rat(600, randomY3, 30, 30, 5, ratImg)
@@ -146,7 +181,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.clearRect(0, 0, game.width, game.height)
         if (garbageBoy.alive && garbageCan.alive) {
             garbageCanCollision()
-            garbageCollision()
             rat1.collision()
             rat2.collision()
             rat3.collision()
@@ -155,7 +189,13 @@ document.addEventListener('DOMContentLoaded', () => {
             endStage()
         }
         if (garbage.alive) {
-            garbage.render()
+            if (randomGarbo === 0) {
+                garbage.render()
+                garbage.collision()
+            } else if (garbage1.alive) {
+                garbage1.render()
+                garbage1.collision()
+            }
         }
         garbageBoy.render()
         garbageCan.render()
@@ -185,19 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
     }
 
-    // When GB picks up a piece of garbage
-    const garbageCollision = () => {
-        if (garbageBoy.x + garbageBoy.width > garbage.x
-            && garbageBoy.x < garbage.x + garbage.width
-            && garbageBoy.y < garbage.y + garbage.height
-            && garbageBoy.y + garbageBoy.height > garbage.y
-            && garbage.alive) {
-                garbage.alive = false
-                garbageUp.play()
-                stageText.textContent = 'Rad garbage my dude!'
-            } 
-    }
-
     const endStage = () => {
         clearInterval(gameLoop)
     }
@@ -213,6 +240,9 @@ document.addEventListener('DOMContentLoaded', () => {
         garbage.alive = true
         garbageBoy.x = 740
         garbageBoy.y = 163
+        // if (!garbage.alive) {
+
+        // }
         garbage.x = generateX(60, 720)
         garbage.y = generateY(0, 360)
         gameLoop = setInterval(gameTick, 60)
