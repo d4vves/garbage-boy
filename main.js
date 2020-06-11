@@ -73,13 +73,13 @@ document.addEventListener('DOMContentLoaded', () => {
         this.move = function() {
             if (this.moveUp && this.y > 0) {
                 this.y -= this.speed
-            } else if (this.moveDown && this.y < game.height) {
+            } else if (this.moveDown && this.y < game.height - this.height) {
                 this.y += this.speed
             } else if (this.moveUp && this.y <= 0) {
                 this.y++
                 this.moveUp = false
                 this.moveDown = true
-            } else if (this.moveDown && this.y >= game.height - this.height - 1) {
+            } else if (this.moveDown && this.y >= game.height - this.height) {
                 this.moveUp = true
                 this.moveDown = false
                 this.y = game.height - this.height
@@ -88,19 +88,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Random X and Y coordinate generators to spawn garbage and each rat randomly
-    const generateX = (num) => {
-        return Math.floor(Math.random() * Math.floor(num))
+    const generateX = (min, max) => {
+        min = Math.ceil(min)
+        max = Math.floor(max)
+        return Math.floor(Math.random() * (max - min) + min)
     }
     
-    const generateY = (num) => {
-        return Math.floor(Math.random() * Math.floor(num))
+    const generateY = (min, max) => {
+        min = Math.ceil(min)
+        max = Math.floor(max)
+        return Math.floor(Math.random() * (max - min) + min)
     }
 
-    let randomX = generateX(game.width - 200)
-    let randomY = generateY(game.height - 40)
-    let randomY1 = generateY(game.height - 30)
-    let randomY2 = generateY(game.height - 30)
-    let randomY3 = generateY(game.height - 30)
+    let randomX = generateX(60, 720)
+    let randomY = generateY(0, 360)
+    let randomY1 = generateY(0, 370)
+    let randomY2 = generateY(0, 370)
+    let randomY3 = generateY(0, 370)
 
     // Game asset creation
     let garbageBoy = new GamePiece(740, 163, 60, 75, 10, gbImg)
@@ -123,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         stageText.textContent = 'Take Garbage Boy home!'
         healthText.style.display = 'inline-block'
         healthText.textContent = 'Health: ❤️'
-        // themeSong.play()
+        themeSong.play()
         themeSong.loop = true
         gameLoop = setInterval(gameTick, 60)
         gameTick()
@@ -207,19 +211,21 @@ document.addEventListener('DOMContentLoaded', () => {
         garbage.alive = true
         garbageBoy.x = 740
         garbageBoy.y = 163
-        garbage.x = generateX(game.width - 200)
-        garbage.y = generateY(game.height - 40)
+        garbage.x = generateX(60, 720)
+        garbage.y = generateY(0, 360)
         gameLoop = setInterval(gameTick, 60)
         gameTick()
     }
 
-    /*----- Movement Mechanics -----*/
-    // WASD Control of GB
+    /*----- GB Movement -----*/
     const moveGarbageBoy = (e) => {
         switch(e.key) {
             case 'w':
                 if (garbageBoy.y > 0) {
                     garbageBoy.y -= garbageBoy.speed;
+                    if (garbageBoy.y < 0) {
+                        garbageBoy.y = 1
+                    }
                 }
                 break;
             case 'd':
@@ -230,6 +236,9 @@ document.addEventListener('DOMContentLoaded', () => {
             case 's':
                 if (garbageBoy.y + garbageBoy.height < game.height) {
                     garbageBoy.y += garbageBoy.speed;
+                    if (garbageBoy.y + garbageBoy.height > game.height) {
+                        garbageBoy.y = game.height - garbageBoy.height
+                    }
                 }
                 break;
             case 'a':
