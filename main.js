@@ -11,8 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
     game.width = 800
     game.height = 400
     let ctx = game.getContext('2d')
-    let themeSong = document.createElement('AUDIO')
+    let themeSong = document.createElement('audio')
     themeSong.src = 'sounds/gb-theme.mp3'
+    let garbageUp = document.createElement('audio')
+    garbageUp.src = 'sounds/garbage-up.mp3'
+    let stageSound = document.createElement('audio')
+    stageSound.src = 'sounds/stage-end.mp3'
+    let ratSound = document.createElement('audio')
+    ratSound.src = 'sounds/rat-hit.mp3'
 
     /*----- Create character sprites -----*/
     let garbageImg = new Image()
@@ -57,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 && garbageBoy.y < this.y + this.height
                 && garbageBoy.y + garbageBoy.height > this.y) {
                     garbageBoy.alive = false
+                    ratSound.play()
                     themeSong.pause()
                     stageText.textContent = 'Ew! A rat!'
                     healthText.textContent = 'Health: 💔'
@@ -116,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
         stageText.textContent = 'Take Garbage Boy home!'
         healthText.style.display = 'inline-block'
         healthText.textContent = 'Health: ❤️'
-        themeSong.play()
+        // themeSong.play()
         themeSong.loop = true
         gameLoop = setInterval(gameTick, 60)
         gameTick()
@@ -162,6 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
             && garbageBoy.y + garbageBoy.height > garbageCan.y
             && !garbage.alive) {
                 garbageCan.alive = false
+                stageSound.play()
                 stageText.textContent = 'Welcome home, Garbage Boy!'
                 retryBtn.style.display = 'inline-block'
             } else if (garbageBoy.x < garbageCan.x + garbageCan.width
@@ -179,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
             && garbageBoy.y < garbage.y + garbage.height
             && garbageBoy.y + garbageBoy.height > garbage.y) {
                 garbage.alive = false
+                garbageUp.play()
                 stageText.textContent = 'Rad garbage my dude!'
             } 
     }
@@ -198,6 +207,8 @@ document.addEventListener('DOMContentLoaded', () => {
         garbage.alive = true
         garbageBoy.x = 740
         garbageBoy.y = 163
+        garbage.x = generateX(game.width - 200)
+        garbage.y = generateY(game.height - 40)
         gameLoop = setInterval(gameTick, 60)
         gameTick()
     }
