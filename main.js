@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let game = document.getElementById('game')
     let retryBtn = document.getElementById('retry-btn')
     let stageBtn = document.getElementById('stage-btn')
+    let muteBtn = document.getElementById('mute')
+    let unMuteBtn = document.getElementById('unmute')
     let currentInv = new Image()
     game.width = 800
     game.height = 400
@@ -178,6 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
         healthText.textContent = 'Health: 1'
         themeSong.play()
         themeSong.loop = true
+        muteBtn.style.display = 'inline-block'
+        unMuteBtn.style.display = 'inline-block'
         gameLoop = setInterval(gameTick, 60)
         gameTick()
     })
@@ -211,6 +215,17 @@ document.addEventListener('DOMContentLoaded', () => {
             garbage1.used = true
         }
         inventoryImg.removeChild(currentInv)
+    })
+
+    //mute and unmute buttons (i cannot keep listening to this song)
+    muteBtn.addEventListener('click', e => {
+        e.preventDefault()
+        themeSong.muted = true
+    })
+
+    unMuteBtn.addEventListener('click', e => {
+        e.preventDefault()
+        themeSong.muted = false
     })
 
     /*----- Functions -----*/
