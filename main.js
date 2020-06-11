@@ -104,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.height = height
         this.alive = true
         this.img = img
+        this.used = false
         this.render = function() {
             ctx.drawImage(this.img, this.x, this.y)
         }
@@ -197,6 +198,21 @@ document.addEventListener('DOMContentLoaded', () => {
         advanceStage()
     })
 
+    // Clicking on inventory item
+    inventoryImg.addEventListener('click', e => {
+        e.preventDefault()
+        if (randomGarbo === 0) {
+            rat1.speed -= 5
+            rat2. speed -= 5
+            rat3.speed -= 5
+            garbage.used = true
+        } else if (randomGarbo === 1) {
+            garbageBoy.speed += 40
+            garbage1.used = true
+        }
+        inventoryImg.removeChild(currentInv)
+    })
+
     /*----- Functions -----*/
 
     // What the game does each frame
@@ -218,7 +234,9 @@ document.addEventListener('DOMContentLoaded', () => {
             garbage1.render()
             garbage1.collision()
         }
-        garbageBoy.render()
+        if (garbageCan.alive) {
+            garbageBoy.render()
+        }
         garbageCan.render()
         rat1.render()
         rat2.render()
@@ -267,36 +285,60 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (!garbage1.alive) {
             garbage1.alive = true
         }
-        inventoryImg.removeChild(currentInv)
+        if (randomGarbo === 0 && garbage.used) {
+            rat1.speed += 5
+            rat2. speed += 5
+            rat3.speed += 5
+        } else if (randomGarbo === 1 && garbage1.used) {
+            garbageBoy.speed -= 40
+        }
         gameLoop = setInterval(gameTick, 60)
         gameTick()
     }
 
     // Advance stage
     const advanceStage = () => {
+        //clear canvas
         ctx.clearRect(0, 0, game.width, game.height)
+        //reset displays
         stageBtn.style.display = 'none'
         messageText.textContent = 'Take Garbage Boy home!'
+        //reset alive-ness
         garbageBoy.alive = true
         garbageCan.alive = true
         garbage.alive = true
+        //set GB at original position
         garbageBoy.x = 740
         garbageBoy.y = 163
+        //remove any garbage effects
+        if (randomGarbo === 0) {
+            rat1.speed += 5
+            rat2. speed += 5
+            rat3.speed += 5
+        } else if (randomGarbo === 1) {
+            garbageBoy.speed -= 40
+        }
+        //create new garbage spawn integer
         randomGarbo = randomNum()
-        if (!garbage.alive && randomGarbo === 0) {
+        //reset garbage to alive and place new garbo
+        if (randomGarbo === 0) {
             garbage.alive = true
             garbage.x = generateX(60, 720)
             garbage.y = generateY(0, 360)
-        } else if (!garbage1.alive && randomGarbo === 1) {
+        } else if (randomGarbo === 1) {
             garbage1.alive = true
             garbage1.x = generateX(60, 720)
             garbage1.y = generateY(0, 360)
         }
+        //increase stage
         stageNum++
+        //increase rat movement speed
         rat1.speed += 2
         rat2.speed += 2
         rat3.speed += 2
+        //update stage number
         stageText.innerText = `Stage: ${stageNum}`
+        //resume game
         gameLoop = setInterval(gameTick, 60)
         gameTick()
     }
@@ -315,6 +357,9 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'd':
                 if (garbageBoy.x + garbageBoy.width < game.width) {
                     garbageBoy.x += garbageBoy.speed;
+                    if (garbageBoy.x + garbageBoy.width > game.width) {
+                        garbageBoy.x = game.width - garbageBoy.width
+                    }
                 }
                 break;
             case 's':
@@ -328,6 +373,9 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'a':
                 if (garbageBoy.x > 0) {
                     garbageBoy.x -= garbageBoy.speed;
+                    if (garbageBoy.x < 0) {
+                        garbageBoy.x = 0
+                    }
                 }
                 break;
         }
