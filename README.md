@@ -6,7 +6,7 @@ Garbage Boy is tired. All they want to do is get back to their cozy garbage home
 
 Garbage Boy also hates littering. Make sure to pick up garbage on your way home, otherwise Garbage Boy will be sad. If Garbage Boy becomes too weighed down by the reality of their part in the destruction of our planet, they will not be able to continue on. Pro-tip: picking up garbage will not only keep Garbage Boy happy but will invigorate them and reward a stat boost!
 
-TLDR: Move Garbage Boy with the WASD keys and navigate back home to their trash can without touching any of those nasty rats. Pick up garbage to keep Garbage Boy happy and gain some sick stat boosts.
+TLDR: Move Garbage Boy with the WASD keys and navigate back home to their trash can without touching any of those nasty rats. Pick up garbage to keep Garbage Boy happy and gain some sick stat boosts by clicking on it in your inventory panel. Don't use your garbage willy-nilly! Any unused garbage will be rolled over into the following level!
 
 [Play Game](https://d4vves.github.io/garbage-boy/)
 

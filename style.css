@@ -88,16 +88,16 @@ h2 {
     width: 50%;
 }
 
+#health {
+    text-align: right;
+}
+
 #inventory {
     text-align: right;
 }
 
 #inventory-img {
     width: 30px;
-}
-
-#health {
-    text-align: right;
 }
 
 #retry-btn {
