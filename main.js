@@ -140,10 +140,18 @@ document.addEventListener('DOMContentLoaded', () => {
         return Math.floor(Math.random() * (max - min) + min)
     }
 
+    // Random Garbage Position
     let randomX = generateX(100, 720)
     let randomY = generateY(0, 360)
+
+    //Random Rat 1
+    let randomX1 = generateX(100, 720)
     let randomY1 = generateY(0, 370)
+    // Random Rat 2
+    let randomX2 = generateX(100, 720)
     let randomY2 = generateY(0, 370)
+    // Random Rat 3
+    let randomX3 = generateX(100, 720)
     let randomY3 = generateY(0, 370)
 
     // Randomly spawn piece of garbage
@@ -161,9 +169,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let garbageCan = new GamePiece(10, 175, 40, 50, 0, garbageImg)
     let garbage = new PieceOfGarbage(randomX, randomY, 20, 20, bottleImg)
     let garbage1 = new PieceOfGarbage(randomX, randomY, 20, 20, chocoImg)
-    let rat1 = new Rat(200, randomY1, 30, 30, 7, ratImg)
-    let rat2 = new Rat(400, randomY2, 30, 30, 6, ratImg)
-    let rat3 = new Rat(600, randomY3, 30, 30, 5, ratImg)
+    let rat1 = new Rat(randomX1, randomY1, 30, 30, 7, ratImg)
+    let rat2 = new Rat(randomX2, randomY2, 30, 30, 6, ratImg)
+    let rat3 = new Rat(randomX3, randomY3, 30, 30, 5, ratImg)
 
     // Game interval
     let gameLoop = null
