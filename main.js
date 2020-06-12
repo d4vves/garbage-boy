@@ -170,9 +170,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let rats = []
 
     //Push rats to array
-    rats.push(new Rat(randomX1, randomY1, 30, 30, 7, 7, ratImg))
+    rats.push(new Rat(randomX1, randomY1, 30, 30, 5, 5, ratImg))
     rats.push(new Rat(randomX2, randomY2, 30, 30, 6, 6, ratImg))
-    rats.push(new Rat(randomX3, randomY3, 30, 30, 5, 5, ratImg))
+    rats.push(new Rat(randomX3, randomY3, 30, 30, 7, 7, ratImg))
 
     // Game interval
     let gameLoop = null
@@ -218,19 +218,12 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault()
         if (e.target.src.includes('img/bottle.png')) {
             for (let i = 0; i < rats.length; i++) {
-                if (rats[i].speedX > 0) {
+                if (rats[i].speedX > 0 && rats[i].speedY > 0) {
                     rats[i].speedX -= stageNum + 1
-                } else {
-                    rats[i].speedX += stageNum +1
-                }
-                if (rats[i].speedY > 0) {
                     rats[i].speedY -= stageNum + 1
                 } else {
+                    rats[i].speedX += stageNum +1
                     rats[i].speedY += stageNum + 1
-                }
-                if (rats[i].speedX <= 0 && rats[i].speedY <= 0) {
-                    rats[i].speedX = 0
-                    rats[i].speedY = 0
                 }
             }
             garbage.used = true
@@ -327,13 +320,11 @@ document.addEventListener('DOMContentLoaded', () => {
         //set GB at original position
         garbageBoy.x = 740
         garbageBoy.y = 163
-        //set rats at original positions
-        rats[0].x = randomX1
-        rats[0].y = randomY1
-        rats[1].x = randomX2
-        rats[1].y = randomY2
-        rats[2].x = randomX3
-        rats[2].y = randomY3
+        //create new rat positions
+        for (let i = 0; i < rats.length; i++) {
+            rats[i].x = generateX(100, 720)
+            rats[i].y = generateY(0, 370)
+        }
         //reset garbage at same point
         if (!garbage.alive) {
             garbage.alive = true
@@ -341,12 +332,10 @@ document.addEventListener('DOMContentLoaded', () => {
             garbage1.alive = true
         }
         //reset any garbage effects
-        rats[0].speedX = 7 + stageNum
-        rats[0].speedY = 7 + stageNum
-        rats[1]. speedX = 6 + stageNum
-        rats[1]. speedY = 6 + stageNum
-        rats[2].speedX = 5 + stageNum
-        rats[2].speedY = 5 + stageNum
+        for (let i = 0; i < rats.length; i++) {
+            rats[i].speedX = 5 + i + stageNum
+            rats[i].speedY = 5 + i + stageNum
+        }
         garbageBoy.speed = 10
         //clear inventory if holding anything
         if (inventoryImg.hasChildNodes()) {
@@ -373,12 +362,10 @@ document.addEventListener('DOMContentLoaded', () => {
         garbageBoy.y = 163
         //remove any garbage effects
         if (garbage.used || garbage1.used) {
-            rats[0].speedX = 7 + stageNum
-            rats[0].speedY = 7 + stageNum
-            rats[1].speedX = 6 + stageNum
-            rats[1].speedY = 6 + stageNum
-            rats[2].speedX = 5 + stageNum
-            rats[2].speedY = 5 + stageNum
+            for (let i = 0; i < rats.length; i++) {
+                rats[i].speedX = 5 + i + stageNum
+                rats[i].speedY = 5 + i + stageNum
+            }
             garbageBoy.speed = 10
         }
         //create new garbage spawn integer
@@ -394,27 +381,17 @@ document.addEventListener('DOMContentLoaded', () => {
             garbage1.y = generateY(0, 360)
         }
         //create new rat positions
-        randomX1 = generateX(100, 720)
-        randomY1 = generateY(0, 370)
-        rats[0].x = randomX1
-        rats[0].y = randomY2
-        randomX2 = generateX(100, 720)
-        randomY2 = generateY(0, 370)
-        rats[1].x = randomX2
-        rats[1].y = randomY2
-        randomX3 = generateX(100, 720)
-        randomY3 = generateY(0, 370)
-        rats[2].x = randomX3
-        rats[2].y = randomY3
+        for (let i = 0; i < rats.length; i++) {
+            rats[i].x = generateX(100, 720)
+            rats[i].y = generateY(0, 370)
+        }
         //increase stage
         stageNum++
         //increase rat movement speed
-        rats[0].speedX += 2
-        rats[0].speedY += 2
-        rats[1].speedX += 2
-        rats[1].speedY += 2
-        rats[2].speedX += 2
-        rats[2].speedY += 2
+        for (let i = 0; i < rats.length; i++) {
+            rats[i].speedX += 1
+            rats[i].speedY += 1
+        }
         //update stage number
         stageText.innerText = `Stage: ${stageNum}`
         //start your engines
