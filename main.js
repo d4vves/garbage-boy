@@ -212,12 +212,39 @@ document.addEventListener('DOMContentLoaded', () => {
     inventoryImg.addEventListener('click', e => {
         e.preventDefault()
         if (e.target.src.includes('img/bottle.png')) {
-            rat1.speedX -= stageNum + 1
-            rat1.speedY -= stageNum + 1
-            rat2.speedX -= stageNum + 1
-            rat2.speedY -= stageNum + 1
-            rat3.speedX -= stageNum + 1
-            rat3.speedY -= stageNum + 1
+            if (rat1.speedX > 0) {
+                rat1.speedX -= stageNum + 1
+            } else {
+                rat1.speedX += stageNum + 1
+            }
+            if (rat1.speedY > 0) {
+                rat1.speedY -= stageNum + 1
+            } else {
+                rat1.speedY += stageNum + 1
+            }
+            
+            if (rat2.speedX > 0) {
+                rat2.speedX -= stageNum + 1
+            } else {
+                rat2.speedX += stageNum + 1
+            }
+            if (rat2.speedY > 0) {
+                rat2.speedY -= stageNum + 1
+            } else {
+                rat2.speedY += stageNum + 1
+            }
+
+            if (rat3.speedX > 0) {
+                rat3.speedX -= stageNum + 1
+            } else {
+                rat3.speedX += stageNum + 1
+            }
+            if (rat3.speedY > 0) {
+                rat3.speedY -= stageNum + 1
+            } else {
+                rat3.speedY += stageNum + 1
+            }
+
             if (rat1.speedX <= 0 && rat1.speedY <= 0) {
                 rat1.speedX = 0
                 rat1.speedY = 0
