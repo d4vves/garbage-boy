@@ -139,15 +139,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let randomY = generateY(0, 360)
 
     //Random Rat 1
-    let randomX1 = generateX(100, 720)
+    let randomX1 = generateX(100, 650)
     let randomY1 = generateY(0, 370)
 
     // Random Rat 2
-    let randomX2 = generateX(100, 720)
+    let randomX2 = generateX(100, 650)
     let randomY2 = generateY(0, 370)
 
     // Random Rat 3
-    let randomX3 = generateX(100, 720)
+    let randomX3 = generateX(100, 650)
     let randomY3 = generateY(0, 370)
 
     // Randomly spawn piece of garbage
