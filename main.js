@@ -58,14 +58,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Rat constructor
-    function Rat(x, y, width, height, speed, img) {
+    function Rat(x, y, width, height, speedX, speedY, img) {
         this.x = x
         this.y = y
         this.width = width
         this.height = height
-        this.speed = speed
-        this.moveUp = true
-        this.moveDown = false
+        this.speedX = speedX
+        this.speedY = speedY
         this.img = img
         this.render = function() {
             ctx.drawImage(this.img, this.x, this.y)
@@ -84,19 +83,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
         }
         this.move = function() {
-            if (this.moveUp && this.y > 0) {
-                this.y -= this.speed
-            } else if (this.moveDown && this.y < game.height - this.height) {
-                this.y += this.speed
-            } else if (this.moveUp && this.y <= 0) {
-                this.y++
-                this.moveUp = false
-                this.moveDown = true
-            } else if (this.moveDown && this.y >= game.height - this.height) {
-                this.moveUp = true
-                this.moveDown = false
-                this.y = game.height - this.height
+            if (this.x < 0 || this.x > game.width - this.width) {
+                this.speedX = -this.speedX
             }
+            if (this.y < this.width || this.y > game.height - this.height) {
+                this.speedY = -this.speedY
+            }
+            this.x += this.speedX
+            this.y += this.speedY
         }
     }
 
@@ -147,9 +141,11 @@ document.addEventListener('DOMContentLoaded', () => {
     //Random Rat 1
     let randomX1 = generateX(100, 720)
     let randomY1 = generateY(0, 370)
+
     // Random Rat 2
     let randomX2 = generateX(100, 720)
     let randomY2 = generateY(0, 370)
+    
     // Random Rat 3
     let randomX3 = generateX(100, 720)
     let randomY3 = generateY(0, 370)
@@ -169,9 +165,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let garbageCan = new GamePiece(10, 175, 40, 50, 0, garbageImg)
     let garbage = new PieceOfGarbage(randomX, randomY, 20, 20, bottleImg)
     let garbage1 = new PieceOfGarbage(randomX, randomY, 20, 20, chocoImg)
-    let rat1 = new Rat(randomX1, randomY1, 30, 30, 7, ratImg)
-    let rat2 = new Rat(randomX2, randomY2, 30, 30, 6, ratImg)
-    let rat3 = new Rat(randomX3, randomY3, 30, 30, 5, ratImg)
+    let rat1 = new Rat(randomX1, randomY1, 30, 30, 7, 7, ratImg)
+    let rat2 = new Rat(randomX2, randomY2, 30, 30, 6, 6, ratImg)
+    let rat3 = new Rat(randomX3, randomY3, 30, 30, 5, 5, ratImg)
 
     // Game interval
     let gameLoop = null
@@ -216,17 +212,23 @@ document.addEventListener('DOMContentLoaded', () => {
     inventoryImg.addEventListener('click', e => {
         e.preventDefault()
         if (e.target.src.includes('img/bottle.png')) {
-            rat1.speed -= stageNum + 1
-            rat2. speed -= stageNum + 1
-            rat3.speed -= stageNum + 1
-            if (rat1.speed <= 0) {
-                rat1.speed = 0
+            rat1.speedX -= stageNum + 1
+            rat1.speedY -= stageNum + 1
+            rat2. speedX -= stageNum + 1
+            rat2. speedY -= stageNum + 1
+            rat3.speedX -= stageNum + 1
+            rat3.speedY -= stageNum + 1
+            if (rat1.speedX <= 0 && rat1.speedY <= 0) {
+                rat1.speedX = 0
+                rat1.speedY = 0
             }
-            if (rat2.speed <= 0) {
-                rat2.speed = 0
+            if (rat2.speedX <= 0 && rat2.speedY <= 0) {
+                rat2.speedX = 0
+                rat2.speedY = 0
             }
-            if (rat3.speed <= 0) {
-                rat3.speed = 0
+            if (rat3.speedX <= 0 && rat3.speedY <= 0) {
+                rat3.speedX = 0
+                rat3.speedY = 0
             }
             garbage.used = true
         } else if (e.target.src.includes('img/choco-bar.png')) {
@@ -324,6 +326,13 @@ document.addEventListener('DOMContentLoaded', () => {
         //set GB at original position
         garbageBoy.x = 740
         garbageBoy.y = 163
+        //set rats at original positions
+        rat1.x = randomX1
+        rat1.y = randomY1
+        rat2.x = randomX2
+        rat2.y = randomY2
+        rat3.x = randomX3
+        rat3.y = randomY3
         //reset garbage at same point
         if (!garbage.alive) {
             garbage.alive = true
@@ -331,9 +340,12 @@ document.addEventListener('DOMContentLoaded', () => {
             garbage1.alive = true
         }
         //reset any garbage effects
-        rat1.speed = 7 + stageNum
-        rat2. speed = 6 + stageNum
-        rat3.speed = 5 + stageNum
+        rat1.speedX = 7 + stageNum
+        rat1.speedY = 7 + stageNum
+        rat2. speedX = 6 + stageNum
+        rat2. speedY = 6 + stageNum
+        rat3.speedX = 5 + stageNum
+        rat3.speedY = 5 + stageNum
         garbageBoy.speed = 10
         //clear inventory if holding anything
         if (inventoryImg.hasChildNodes()) {
@@ -360,9 +372,12 @@ document.addEventListener('DOMContentLoaded', () => {
         garbageBoy.y = 163
         //remove any garbage effects
         if (garbage.used || garbage1.used) {
-            rat1.speed = 7 + stageNum
-            rat2. speed = 6 + stageNum
-            rat3.speed = 5 + stageNum
+            rat1.speedX = 7 + stageNum
+            rat1.speedY = 7 + stageNum
+            rat2.speedX = 6 + stageNum
+            rat2.speedY = 6 + stageNum
+            rat3.speedX = 5 + stageNum
+            rat3.speedY = 5 + stageNum
             garbageBoy.speed = 10
         }
         //create new garbage spawn integer
@@ -377,12 +392,28 @@ document.addEventListener('DOMContentLoaded', () => {
             garbage1.x = generateX(100, 720)
             garbage1.y = generateY(0, 360)
         }
+        //create new rat positions
+        randomX1 = generateX(100, 720)
+        randomY1 = generateY(0, 370)
+        rat1.x = randomX1
+        rat1.y = randomY2
+        randomX2 = generateX(100, 720)
+        randomY2 = generateY(0, 370)
+        rat2.x = randomX2
+        rat2.y = randomY2
+        randomX3 = generateX(100, 720)
+        randomY3 = generateY(0, 370)
+        rat3.x = randomX3
+        rat3.y = randomY3
         //increase stage
         stageNum++
         //increase rat movement speed
-        rat1.speed += 2
-        rat2.speed += 2
-        rat3.speed += 2
+        rat1.speedX += 2
+        rat1.speedY += 2
+        rat2.speedX += 2
+        rat2.speedY += 2
+        rat3.speedX += 2
+        rat3.speedY += 2
         //update stage number
         stageText.innerText = `Stage: ${stageNum}`
         //start your engines
