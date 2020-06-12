@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         messageText.textContent = 'Take Garbage Boy home!'
         inventoryText.textContent = 'Inventory: '
         healthText.textContent = 'Health: 1'
-        // themeSong.play()
+        themeSong.play()
         themeSong.loop = true
         muteBtn.style.display = 'inline-block'
         unMuteBtn.style.display = 'inline-block'
