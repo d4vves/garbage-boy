@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (this.x < 0 || this.x > game.width - this.width) {
                 this.speedX = -this.speedX
             }
-            if (this.y < this.width || this.y > game.height - this.height) {
+            if (this.y < 0 || this.y > game.height - this.height) {
                 this.speedY = -this.speedY
             }
             this.x += this.speedX
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Random Rat 2
     let randomX2 = generateX(100, 720)
     let randomY2 = generateY(0, 370)
-    
+
     // Random Rat 3
     let randomX3 = generateX(100, 720)
     let randomY3 = generateY(0, 370)
