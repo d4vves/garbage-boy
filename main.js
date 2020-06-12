@@ -214,8 +214,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.src.includes('img/bottle.png')) {
             rat1.speedX -= stageNum + 1
             rat1.speedY -= stageNum + 1
-            rat2. speedX -= stageNum + 1
-            rat2. speedY -= stageNum + 1
+            rat2.speedX -= stageNum + 1
+            rat2.speedY -= stageNum + 1
             rat3.speedX -= stageNum + 1
             rat3.speedY -= stageNum + 1
             if (rat1.speedX <= 0 && rat1.speedY <= 0) {
