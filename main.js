@@ -74,12 +74,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 && garbageBoy.x < this.x + this.width
                 && garbageBoy.y < this.y + this.height
                 && garbageBoy.y + garbageBoy.height > this.y) {
+                    endStage()
+                    themeSong.pause()
                     garbageBoy.alive = false
                     ratSound.play()
-                    themeSong.pause()
-                    messageText.textContent = 'Ew! A rat!'
                     healthText.textContent = 'Health: 0'
                     retryBtn.style.display = 'inline-block'
+                    ctx.font = '150px VT323'
+                    ctx.fillStyle = '#C6CA53'
+                    ctx.textAlign = 'center';
+                    ctx.fillText('Ew! A rat!', game.width/2, game.height/2)
                 }
         }
         this.move = function() {
@@ -269,9 +273,6 @@ document.addEventListener('DOMContentLoaded', () => {
             for (let i = 0; i < rats.length; i++) {
                 rats[i].collision()
             }
-        } else {
-            themeSong.pause()
-            endStage()
         }
         if (garbage.alive && randomGarbo === 0) {
              garbage.render()
@@ -296,9 +297,14 @@ document.addEventListener('DOMContentLoaded', () => {
             && garbageBoy.y < garbageCan.y + garbageCan.height
             && garbageBoy.y + garbageBoy.height > garbageCan.y
             && (!garbage.alive || !garbage1.alive)) {
+                themeSong.pause()
+                endStage()
                 garbageCan.alive = false
                 stageSound.play()
-                messageText.textContent = 'Welcome home, Garbage Boy!'
+                ctx.font = '115px VT323'
+                ctx.fillStyle = '#C6CA53'
+                ctx.textAlign = 'center';
+                ctx.fillText('Welcome home, GB!', game.width/2, game.height/2)
                 stageBtn.style.display = 'inline-block'
             } else if (garbageBoy.x < garbageCan.x + garbageCan.width
                 && garbageBoy.y < garbageCan.y + garbageCan.height
