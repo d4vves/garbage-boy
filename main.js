@@ -89,8 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (this.y < 0 || this.y > game.height - this.height) {
                 this.speedY = -this.speedY
             }
-            this.x += this.speedX
-            this.y += this.speedY
+            this.x -= this.speedX
+            this.y -= this.speedY
         }
     }
 
@@ -221,9 +221,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (rats[i].speedX > 0 && rats[i].speedY > 0) {
                     rats[i].speedX -= stageNum + 1
                     rats[i].speedY -= stageNum + 1
+                    if (rats[i].speedX <= 0 && rats[i].speedY <= 0) {
+                        rats[i].speedX = 0
+                        rats[i].speedY = 0
+                    }
                 } else {
-                    rats[i].speedX += stageNum +1
+                    rats[i].speedX += stageNum + 1
                     rats[i].speedY += stageNum + 1
+                    if (rats[i].speedX >= 0 && rats[i].speedY >= 0) {
+                        rats[i].speedX = 0
+                        rats[i].speedY = 0
+                    }
                 }
             }
             garbage.used = true
