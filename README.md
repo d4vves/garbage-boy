@@ -4,9 +4,11 @@
 
 Garbage Boy is tired. All they want to do is get back to their cozy garbage home and catch some z's. BUT ALAS! There are a bunch of nasty rats running around, and Garbage Boy HATES rats. If they come in contact with a rat, they will LITERALLY die. 
 
-Garbage Boy also hates littering. Make sure to pick up garbage on your way home, otherwise Garbage Boy will be sad. If Garbage Boy becomes too weighed down by the reality of their part in the destruction of our planet, they will not be able to continue on. Pro-tip: picking up garbage will not only keep Garbage Boy happy but will invigorate them and reward a stat boost!
+Garbage Boy also hates littering. Make sure to pick up garbage on your way home, otherwise Garbage Boy will be sad. If Garbage Boy becomes too weighed down by the reality of their part in the destruction of our planet, they will not be able to continue on. Pro-tip: picking up garbage will not only keep Garbage Boy happy but will invigorate them and reward a stat boost by clicking on it in your inventory panel. Don't go using your garbage willy-nilly! Any unused garbage will be rolled over into the following level.
 
-TLDR: Move Garbage Boy with the WASD keys and navigate back home to their trash can without touching any of those nasty rats. Pick up garbage to keep Garbage Boy happy and gain some sick stat boosts by clicking on it in your inventory panel. Don't use your garbage willy-nilly! Any unused garbage will be rolled over into the following level!
+WATCH OUT for Big Ben. He's been known to periodically show his smug face around town, and he loathes Garbage Boy. 
+
+TLDR: Move Garbage Boy with the WASD keys and navigate back home to their trash can without touching any of those nasty rats. Pick up garbage to keep Garbage Boy happy and gain some sick stat boosts by clicking on it in your inventory panel. 
 
 [Play Game](https://d4vves.github.io/garbage-boy/)
 
