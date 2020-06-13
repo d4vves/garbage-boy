@@ -22,12 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
     /*----- Sounds -----*/
     let themeSong = document.createElement('audio')
     themeSong.src = 'sounds/gb-theme.mp3'
+    themeSong.volume = .5
     let garbageUp = document.createElement('audio')
     garbageUp.src = 'sounds/garbage-up.mp3'
+    garbageUp.volume = .5
     let stageSound = document.createElement('audio')
     stageSound.src = 'sounds/stage-end.mp3'
+    stageSound.volume = .5
     let ratSound = document.createElement('audio')
     ratSound.src = 'sounds/rat-hit.mp3'
+    ratSound.volume = .5
 
     /*----- Create character sprites -----*/
     let garbageImg = new Image()
