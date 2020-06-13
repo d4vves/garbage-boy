@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let garbageCan = new GamePiece(10, 175, 40, 50, 0, garbageImg)
     let garbage = new PieceOfGarbage(randomX, randomY, 20, 20, bottleImg)
     let garbage1 = new PieceOfGarbage(randomX, randomY, 20, 20, chocoImg)
-    let bigBen = new Ben(60, 175, 30, 23, 2, benImg)
+    let bigBen = new Ben(60, 175, 30, 23, 1, benImg)
 
     // Rat array
     let rats = []
