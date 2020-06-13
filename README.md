@@ -8,7 +8,7 @@ Garbage Boy also hates littering. Make sure to pick up garbage on your way home,
 
 WATCH OUT for Big Ben. He's been known to periodically show his smug face around town, and he loathes Garbage Boy. 
 
-TLDR: Move Garbage Boy with the WASD keys and navigate back home to their trash can without touching any of those nasty rats. Pick up garbage to keep Garbage Boy happy and gain some sick stat boosts by clicking on it in your inventory panel. 
+TLDR: Move Garbage Boy with the WASD keys and navigate back home to their trash can without touching any of those nasty rats. Pick up garbage on your way home to keep Garbage Boy happy and gain some sick stat boosts by clicking on it in your inventory panel. 
 
 [Play Game](https://d4vves.github.io/garbage-boy/)
 
@@ -33,9 +33,10 @@ Check out how I planned out all of the amazing things Garbage Boy can do [here](
 - Display current level
 - Each level the rats movement speed will increase
 - Picking up garbage will add it to GB's inventory, display inventory on game screen
-- Ability to click on garbage in inventory to either make the rats movement pause for a few seconds or increase GB's movement speed depending on garbage type of water bottle or chewing gum
+- Ability to click on garbage in inventory to either make the rats movement pause for a few seconds or increase GB's movement speed depending on garbage type of water bottle or chocolate bar.
 - Have rats spawn randomly on the canvas
 - Have rats move randomly on the canvas
+- Add Big Ben, the homing rat
 
 ## Notes
 - This game was created using HTML5, CSS, and JavaScript.

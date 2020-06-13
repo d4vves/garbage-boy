@@ -130,14 +130,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         this.move = function() {
             if (garbageBoy.x > this.x) {
-                this.x += speed
+                this.x += this.speed
             } else if (garbageBoy.x < this.x) {
-                this.x -= speed
+                this.x -= this.speed
             }
             if (garbageBoy.y > this.y) {
-                this.y += speed
+                this.y += this.speed
             } else if (garbageBoy.y < this.y) {
-                this.y -= speed
+                this.y -= this.speed
             }
         }
     }
@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             console.log(bigBen.speed)
             console.log("REDUCE BEN!")
-            bigBen.speed = 10
+            bigBen.speed = 0
             console.log(bigBen.speed)
             garbage.used = true
         } else if (e.target.src.includes('img/choco-bar.png')) {
