@@ -277,7 +277,6 @@ document.addEventListener('DOMContentLoaded', () => {
         themeSong.play()
         themeSong.loop = true
         muteBtn.style.display = 'inline-block'
-        unMuteBtn.style.display = 'inline-block'
         gameLoop = setInterval(gameTick, 60)
         gameTick()
     })
@@ -339,6 +338,8 @@ document.addEventListener('DOMContentLoaded', () => {
     //mute and unmute buttons (i cannot keep listening to this song)
     muteBtn.addEventListener('click', e => {
         e.preventDefault()
+        muteBtn.style.display = 'none'
+        unMuteBtn.style.display = 'inline-block'
         themeSong.muted = true
         garbageUp.muted = true
         stageSound.muted = true
@@ -347,6 +348,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     unMuteBtn.addEventListener('click', e => {
         e.preventDefault()
+        muteBtn.style.display = 'inline-block'
+        unMuteBtn.style.display = 'none'
         themeSong.muted = false
         garbageUp.muted = false
         stageSound.muted = false
