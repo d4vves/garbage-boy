@@ -95,12 +95,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
         }
         this.move = function() {
-            if (this.x < 0 || this.x > game.width - this.width) {
+            if (this.x <= 0 || this.x >= game.width - this.width) {
                 this.speedX = -this.speedX
             }
-            if (this.y < 0 || this.y > game.height - this.height) {
+            if (this.y <= 0 || this.y >= game.height - this.height) {
                 this.speedY = -this.speedY
             }
+            if (this.x + this.width > trafficCone.x
+                && this.x < trafficCone.x + trafficCone.width
+                && this.y < trafficCone.y + trafficCone.height
+                && this.y + this.height > trafficCone.y) {
+                    this.speedX = -this.speedX
+                    this.speedY = -this.speedY
+                }
             this.x -= this.speedX
             this.y -= this.speedY
         }
