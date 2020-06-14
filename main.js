@@ -509,6 +509,9 @@ document.addEventListener('DOMContentLoaded', () => {
         benSpawn = benSpawnChance()
         bigBen.x = 60
         bigBen.y = 175
+        //New Traffic Cone spawn
+        trafficCone.x = generateX(100, 650)
+        trafficCone.y = generateY(0, 370)
         //increase stage number
         stageNum++
         //update stage display
