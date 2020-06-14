@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ratSound.src = 'sounds/rat-hit.mp3'
     ratSound.volume = .5
 
-    /*----- Create character sprites -----*/
+    /*----- Create sprites -----*/
     let garbageImg = new Image()
     garbageImg.src = 'img/garbage.png'
     let gbImg = new Image()
@@ -46,6 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
     ratImg.src = 'img/rat.png'
     let benImg = new Image()
     benImg.src = 'img/ben.png'
+    let coneImg = new Image()
+    coneImg.src = 'img/cone.png'
 
 
     /*----- Variable Declarations -----*/
@@ -173,6 +175,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Barrier constructor
+    function Barrier(x, y, width, height, img) {
+        this.x = x
+        this.y = y
+        this.width = width
+        this.height = height
+        this.img = img
+        this.render = function() {
+            ctx.drawImage(this.img, this.x, this.y)
+        }
+    }
+
     // Random X and Y coordinate generators to spawn garbage and each rat randomly
     const generateX = (min, max) => {
         min = Math.ceil(min)
@@ -202,6 +216,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let randomX3 = generateX(100, 650)
     let randomY3 = generateY(0, 370)
 
+    // Traffic Cone
+    let randomXCone = generateX(100, 650)
+    let randomYCone = generateY(0, 370)
+
     // Randomly spawn piece of garbage
     const randomNum = () => {
         return Math.floor(Math.random() * 2)
@@ -224,6 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let garbage = new PieceOfGarbage(randomX, randomY, 20, 20, bottleImg)
     let garbage1 = new PieceOfGarbage(randomX, randomY, 20, 20, chocoImg)
     let bigBen = new Ben(60, 175, 30, 23, 1, benImg)
+    let trafficCone = new Barrier(randomXCone, randomYCone, 29, 36, coneImg)
 
     // Rat array
     let rats = []
@@ -301,10 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             })
-            console.log(bigBen.speed)
-            console.log("REDUCE BEN!")
             bigBen.speed = 0
-            console.log(bigBen.speed)
             garbage.used = true
         } else if (e.target.src.includes('img/choco-bar.png')) {
             garbageBoy.speed += 40
@@ -361,6 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
             bigBen.move()
             bigBen.collision()
         }
+        trafficCone.render()
     }
 
     // If GB makes it home!
@@ -504,6 +521,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         garbageBoy.y = 1
                     }
                 }
+                if (garbageBoy.x + garbageBoy.width > trafficCone.x
+                    && garbageBoy.x < trafficCone.x + trafficCone.width
+                    && garbageBoy.y < trafficCone.y + trafficCone.height
+                    && garbageBoy.y + garbageBoy.height > trafficCone.y) {
+                        garbageBoy.y = trafficCone.y + trafficCone.height
+                    }
                 break;
             case 'd':
                 if (garbageBoy.x + garbageBoy.width < game.width) {
@@ -512,6 +535,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         garbageBoy.x = game.width - garbageBoy.width
                     }
                 }
+                if (garbageBoy.x + garbageBoy.width > trafficCone.x
+                    && garbageBoy.x < trafficCone.x + trafficCone.width
+                    && garbageBoy.y < trafficCone.y + trafficCone.height
+                    && garbageBoy.y + garbageBoy.height > trafficCone.y) {
+                        garbageBoy.x = trafficCone.x - garbageBoy.width
+                    }
                 break;
             case 's':
                 if (garbageBoy.y + garbageBoy.height < game.height) {
@@ -520,6 +549,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         garbageBoy.y = game.height - garbageBoy.height
                     }
                 }
+                if (garbageBoy.x + garbageBoy.width > trafficCone.x
+                    && garbageBoy.x < trafficCone.x + trafficCone.width
+                    && garbageBoy.y < trafficCone.y + trafficCone.height
+                    && garbageBoy.y + garbageBoy.height > trafficCone.y) {
+                        garbageBoy.y = trafficCone.y - garbageBoy.height
+                    }
                 break;
             case 'a':
                 if (garbageBoy.x > 0) {
@@ -528,6 +563,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         garbageBoy.x = 0
                     }
                 }
+                if (garbageBoy.x + garbageBoy.width > trafficCone.x
+                    && garbageBoy.x < trafficCone.x + trafficCone.width
+                    && garbageBoy.y < trafficCone.y + trafficCone.height
+                    && garbageBoy.y + garbageBoy.height > trafficCone.y) {
+                        garbageBoy.x = trafficCone.x + trafficCone.width
+                    }
                 break;
         }
     }
