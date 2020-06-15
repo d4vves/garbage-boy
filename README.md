@@ -37,6 +37,7 @@ Check out how I planned out all of the amazing things Garbage Boy can do [here](
 - Have rats spawn randomly on the canvas
 - Have rats move randomly on the canvas
 - Add Big Ben, the homing rat
+- Add obstacles that GB nor rats can move through.
 
 ## Notes
 - This game was created using HTML5, CSS, and JavaScript.

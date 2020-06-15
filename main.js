@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /*----- Variable Declarations -----*/
-    // Garbage Boy / Garbage Boy constructor
+    // Garbage Boy / Garbage Can constructor
     function GamePiece(x, y, width, height, speed, img) {
         this.x = x
         this.y = y
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ratSound.play()
                     healthText.textContent = 'Health: 0'
                     retryBtn.style.display = 'inline-block'
-                    ctx.font = '150px VT323'
+                    ctx.font = '150px Freckle Face'
                     ctx.fillStyle = '#C6CA53'
                     ctx.textAlign = 'center';
                     ctx.fillText('Ew! A rat!', game.width/2, game.height/2)
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ratSound.play()
                     healthText.textContent = 'Health: 0'
                     retryBtn.style.display = 'inline-block'
-                    ctx.font = '125px VT323'
+                    ctx.font = '100px Freckle Face'
                     ctx.fillStyle = '#C6CA53'
                     ctx.textAlign = 'center';
                     ctx.fillText('Big Ben! *gasp*', game.width/2, game.height/2)
@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Random X and Y coordinate generators to spawn garbage and each rat randomly
+    // Random X and Y coordinate generators
     const generateX = (min, max) => {
         min = Math.ceil(min)
         max = Math.floor(max)
@@ -361,12 +361,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // What the game does each frame
     const gameTick = () => {
         ctx.clearRect(0, 0, game.width, game.height)
-        if (garbageBoy.alive && garbageCan.alive) {
-            garbageCanCollision()
-            for (let i = 0; i < rats.length; i++) {
-                rats[i].collision()
-            }
-        }
+        //render garbage can and run collision
+        garbageCan.render()
+        garbageCanCollision()
+        //render obstacle
+        trafficCone.render()
+        //check for random garbage spawn
         if (garbage.alive && randomGarbo === 0) {
              garbage.render()
              garbage.collision()
@@ -374,20 +374,22 @@ document.addEventListener('DOMContentLoaded', () => {
             garbage1.render()
             garbage1.collision()
         }
+        //render garbageboy only if you haven't made it home
         if (garbageCan.alive) {
             garbageBoy.render()
         }
-        garbageCan.render()
+        //run through rat array
         for (let i = 0; i < rats.length; i++) {
             rats[i].render()
             rats[i].move()
+            rats[i].collision()
         }
+        //check for big ben spawn
         if (benSpawn <= .20) {
             bigBen.render()
             bigBen.move()
             bigBen.collision()
         }
-        trafficCone.render()
     }
 
     // If GB makes it home!
@@ -400,7 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 endStage()
                 garbageCan.alive = false
                 stageSound.play()
-                ctx.font = '115px VT323'
+                ctx.font = '90px Freckle Face'
                 ctx.fillStyle = '#C6CA53'
                 ctx.textAlign = 'center';
                 ctx.fillText('Welcome home, GB!', game.width/2, game.height/2)
