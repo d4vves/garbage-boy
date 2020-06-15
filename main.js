@@ -208,11 +208,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Random Garbage Position
-    let randomX = generateX(100, 720)
+    let randomX = generateX(125, 720)
     let randomY = generateY(0, 360)
 
     //Random Rat 1
-    let randomX1 = generateX(100, 650)
+    let randomX1 = generateX(125, 650)
     let randomY1 = generateY(0, 370)
 
     // Random Rat 2
@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Traffic Cone
     let randomXCone = generateX(100, 650)
-    let randomYCone = generateY(0, 370)
+    let randomYCone = generateY(0, 360)
 
     // Randomly spawn piece of garbage
     const randomNum = () => {
@@ -248,10 +248,37 @@ document.addEventListener('DOMContentLoaded', () => {
     // Rat array
     let rats = []
 
-    //Push rats to array
+    // Push rats to array
     rats.push(new Rat(randomX1, randomY1, 30, 23, 5, 5, ratImg))
     rats.push(new Rat(randomX2, randomY2, 30, 23, 6, 6, ratImg))
     rats.push(new Rat(randomX3, randomY3, 30, 23, 7, 7, ratImg))
+
+    // Prevent rats from spawning within barrier object
+    rats.forEach((rat) => {
+        if (rat.x + rat.width >= trafficCone.x
+            && rat.x <= trafficCone.x + trafficCone.width
+            && rat.y <= trafficCone.y + trafficCone.height
+            && rat.y + rat.height >= trafficCone.y) {
+                rat.x = trafficCone.x - rat.width
+                rat.y = trafficCone.y - rat.height
+            }
+    })
+
+    // Prevent garbage from spawning within barrier object
+    if (garbage.x + garbage.width >= trafficCone.x
+        && garbage.x <= trafficCone.x + trafficCone.width
+        && garbage.y <= trafficCone.y + trafficCone.height
+        && garbage.y + garbage.height >= trafficCone.y) {
+            garbage.x = trafficCone.x - garbage.width
+            garbage.y = trafficCone.y - garbage.height
+        }
+    if (garbage1.x + garbage1.width >= trafficCone.x
+        && garbage1.x <= trafficCone.x + trafficCone.width
+        && garbage1.y <= trafficCone.y + trafficCone.height
+        && garbage1.y + garbage1.height >= trafficCone.y) {
+            garbage1.x = trafficCone.x - garbage1.width
+            garbage1.y = trafficCone.y - garbage1.height
+        }
 
     // Game interval
     let gameLoop = null
