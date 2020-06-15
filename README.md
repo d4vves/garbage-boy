@@ -15,8 +15,6 @@ TLDR: Move Garbage Boy with the WASD keys and navigate back home to their trash 
 ## Wireframe
 ![Wireframe](img/gb-wireframe.jpg)
 
-Check out how I planned out all of the amazing things Garbage Boy can do [here](https://hackmd.io/@d4vves/SJVPKrTn8). 
-
 ## MVP
 - Create a CLI-like game screen
 - Render a start screen with game-play instructions and a start button
@@ -43,6 +41,8 @@ Check out how I planned out all of the amazing things Garbage Boy can do [here](
 - This game was created using HTML5, CSS, and JavaScript.
 - All artwork was created by myself using Gimp.
 - All music and sound effects were created by myself using Garageband and the YMCK magical 8 bit plugin.
+
+Check out how I planned out all of the amazing things Garbage Boy can do [here](https://hackmd.io/@d4vves/SJVPKrTn8). 
 
 ## Blooper Reel
 - Garbage Boy sprite v.1
