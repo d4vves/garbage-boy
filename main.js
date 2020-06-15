@@ -379,6 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         //check for big ben spawn
         if (stageNum % 5 === 0) {
+            messageText.textContent = 'Oh no Big Ben is here!'
             bigBen.render()
             bigBen.move()
             bigBen.collision()
