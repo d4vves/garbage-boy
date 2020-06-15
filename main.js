@@ -372,11 +372,11 @@ document.addEventListener('DOMContentLoaded', () => {
             garbageBoy.render()
         }
         //run through rat array
-        for (let i = 0; i < rats.length; i++) {
-            rats[i].render()
-            rats[i].move()
-            rats[i].collision()
-        }
+        rats.forEach((rat) => {
+            rat.render()
+            rat.move()
+            rat.collision()
+        })
         //check for big ben spawn
         if (stageNum % 5 === 0) {
             bigBen.render()
@@ -496,15 +496,15 @@ document.addEventListener('DOMContentLoaded', () => {
             garbage1.y = generateY(0, 360)
         }
         //create new rat positions
-        for (let i = 0; i < rats.length; i++) {
-            rats[i].x = generateX(100, 720)
-            rats[i].y = generateY(0, 370)
-        }
+        rats.forEach((rat) => {
+            rat.x = generateX(100, 720)
+            rat.y = generateY(0, 370)
+        })
         //increase rat movement speed
-        for (let i = 0; i < rats.length; i++) {
-            rats[i].speedX += 1
-            rats[i].speedY += 1
-        }
+        rats.forEach((rat) => {
+            rat.speedX += 1
+            rat.speedY += 1
+        })
         //reset Big Ben spawn
         bigBen.x = 60
         bigBen.y = 175
