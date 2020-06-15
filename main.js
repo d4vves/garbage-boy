@@ -234,12 +234,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let randomGarbo = randomNum()
 
-    const benSpawnChance = () => {
-        return Math.random()
-    }
-
-    let benSpawn = benSpawnChance()
-
     // Stage number
     let stageNum = 1
 
@@ -326,7 +320,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             })
-            bigBen.speed = 0
             garbage.used = true
         } else if (e.target.src.includes('img/choco-bar.png')) {
             garbageBoy.speed += 40
@@ -385,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
             rats[i].collision()
         }
         //check for big ben spawn
-        if (benSpawn <= .20) {
+        if (stageNum % 5 === 0) {
             bigBen.render()
             bigBen.move()
             bigBen.collision()
@@ -438,11 +431,13 @@ document.addEventListener('DOMContentLoaded', () => {
         //set Big Ben at original position
         bigBen.x = 60
         bigBen.y = 175
-        //create new rat positions
-        for (let i = 0; i < rats.length; i++) {
-            rats[i].x = generateX(100, 720)
-            rats[i].y = generateY(0, 370)
-        }
+        // reset rats at original position
+        rats[0].x = randomX1
+        rats[0].y = randomY1
+        rats[1].x = randomX2
+        rats[1].y = randomY2
+        rats[2].x = randomX3
+        rats[2].y = randomY3
         //reset garbage at same point
         if (!garbage.alive) {
             garbage.alive = true
@@ -511,7 +506,6 @@ document.addEventListener('DOMContentLoaded', () => {
             rats[i].speedY += 1
         }
         //reset Big Ben spawn
-        benSpawn = benSpawnChance()
         bigBen.x = 60
         bigBen.y = 175
         //New Traffic Cone spawn
