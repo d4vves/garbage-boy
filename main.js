@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     themeSong.pause()
                     garbageBoy.alive = false
                     ratSound.play()
-                    healthText.textContent = 'Health: 0'
+                    healthText.textContent = 'Health: 💔'
                     retryBtn.style.display = 'inline-block'
                     ctx.font = '150px Freckle Face'
                     ctx.fillStyle = '#C6CA53'
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     themeSong.pause()
                     garbageBoy.alive = false
                     ratSound.play()
-                    healthText.textContent = 'Health: 0'
+                    healthText.textContent = 'Health: 💔'
                     retryBtn.style.display = 'inline-block'
                     ctx.font = '100px Freckle Face'
                     ctx.fillStyle = '#C6CA53'
@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
         stageText.textContent = `Stage: ${stageNum}`
         messageText.textContent = 'Take Garbage Boy home!'
         inventoryText.textContent = 'Inventory: '
-        healthText.textContent = 'Health: 1'
+        healthText.textContent = 'Health: ❤️'
         themeSong.play()
         themeSong.loop = true
         muteBtn.style.display = 'inline-block'
@@ -448,7 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //update display
         retryBtn.style.display = 'none'
         messageText.textContent = 'Take Garbage Boy home!'
-        healthText.textContent = 'Health: 1'
+        healthText.textContent = 'Health: ❤️'
         //reset alive-ness & position
         garbageBoy.alive = true
         garbageCan.alive = true
