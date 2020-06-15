@@ -324,24 +324,24 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.src.includes('img/bottle.png')) {
             rats.forEach((rat) => {
                 if (rat.speedX > 0) {
-                    rat.speedX -= stageNum + 2
+                    rat.speedX -= stageNum + 1
                     if (rat.speedX <= 0) {
                         rat.speedX = 0
                     }
                 } else if (rat.speedX < 0) {
-                    rat.speedX += stageNum + 2
+                    rat.speedX += stageNum + 1
                     if (rat.speedX >= 0) {
                         rat.speedX = 0
                     }
                 }
 
                 if (rat.speedY > 0) {
-                    rat.speedY -= stageNum + 2
+                    rat.speedY -= stageNum + 1
                     if (rat.speedY <= 0) {
                         rat.speedY = 0
                     }
                 } else if (rat.speedY < 0) {
-                    rat.speedY += stageNum + 2
+                    rat.speedY += stageNum + 1
                     if (rat.speedY >= 0) {
                         rat.speedY = 0
                     }
