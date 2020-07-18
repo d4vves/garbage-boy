@@ -12,6 +12,8 @@ TLDR: Move Garbage Boy with the WASD keys and navigate back home to their trash 
 
 [Play Game](https://d4vves.github.io/garbage-boy/)
 
+![Screenshot](img/screen-shot.png)
+
 ## Wireframe
 ![Wireframe](img/gb-wireframe.jpg)
 
